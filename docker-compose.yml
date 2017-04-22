@@ -7,7 +7,6 @@ version: '2'
 
 services:
 
-
     # Servidor FREERADIUS
     radius: # Definir contenedor
       container_name: server_radius
@@ -22,10 +21,8 @@ services:
         - mysql
         - ldap
         - kerberos
-
       expose:
         - "1812"
-
 
     # Servidor MYSQL
     mysql:
@@ -37,7 +34,6 @@ services:
       expose:
         - "3306"
 
-
     # Servidor LDAP
     ldap:
       container_name: server_ldap
@@ -46,12 +42,11 @@ services:
       ports:
         - "389:389"
         - "636:636"
-     expose:
-       - "389"
-       - "636"
-     links:
+      expose:
+        - "389"
+        - "636"
+      links:
        - kerberos
-
 
     # Servidor KERBEROS
     kerberos:
@@ -65,7 +60,6 @@ services:
         - "464"
         - "749"
 
-
     # Servidor WEB
     http:
       container_name: server_http
@@ -78,16 +72,14 @@ services:
         - "80"
         - "443"
       links:
-        mysql
+        - mysql
     
-
     # Autoridad certificadora
     ca:
       container_name: autoridad_certificadora
       build:
         context: ca_host
     
-
 networks:
   new-network:
     driver: bridge
