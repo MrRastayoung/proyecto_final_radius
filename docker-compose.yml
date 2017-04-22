@@ -8,7 +8,7 @@ version: '2'
 services:
 
 
-    ## Servidor FREERADIUS
+    # Servidor FREERADIUS
     radius: # Definir contenedor
       container_name: server_radius
       build:
@@ -27,7 +27,7 @@ services:
         - "1812"
 
 
-    ## Servidor MYSQL
+    # Servidor MYSQL
     mysql:
       container_name: server_mysql
       build:
@@ -38,7 +38,7 @@ services:
         - "3306"
 
 
-    ## Servidor LDAP
+    # Servidor LDAP
     ldap:
       container_name: server_ldap
       build:
@@ -53,7 +53,7 @@ services:
        - kerberos
 
 
-    ## Servidor KERBEROS
+    # Servidor KERBEROS
     kerberos:
       container_name: server_kerberos
       build:
@@ -66,7 +66,7 @@ services:
         - "749"
 
 
-    ## Servidor WEB
+    # Servidor WEB
     http:
       container_name: server_http
       build:
@@ -81,7 +81,7 @@ services:
         mysql
     
 
-    ## Autoridad certificadora
+    # Autoridad certificadora
     ca:
       container_name: autoridad_certificadora
       build:
