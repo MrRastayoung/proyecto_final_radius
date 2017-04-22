@@ -2,6 +2,7 @@
 
 
 ## Servidor Radius + Ldap + Kerberos + Http + TLS
+![freeradius](/img/freeradius.png)
 
 ### En que consiste este proyecto
 
