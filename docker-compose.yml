@@ -16,13 +16,16 @@ services:
         - "1812:1812"
         - "1813:1813"
       networks:
-        - new-network
+        new-network:
+          ipv4_address: 172.18.0.2
       links:
         - mysql
         - ldap
         - kerberos
       expose:
         - "1812"
+      extra_hosts:
+        - "mysql:172.18.0.1"
 
     # Servidor MYSQL
     mysql:
@@ -83,3 +86,7 @@ services:
 networks:
   new-network:
     driver: bridge
+    ipam:
+      config:
+        - subnet: 172.18.0.0/24
+        - gateway: 172.18.0.1
