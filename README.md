@@ -4,9 +4,9 @@
 ## Servidor Radius + Ldap + Kerberos + Http + TLS
 ![FreeRadius](/img/freeradius.png)
 ![OpenLdap](/img/openldap.png)
-![Kerberos]()
-![Daloradius](/img/daloradius.png)
-![Python](/img python.png)
+![Kerberos](/img/kerberos_mit.png)
+![Daloradius](/img/daloradius.jpg)
+![Python](/img/python.png)
 ![Raspbian](/img/raspbian.png)
 ### En que consiste este proyecto
 
