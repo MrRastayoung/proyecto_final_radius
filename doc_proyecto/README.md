@@ -17,8 +17,8 @@ documentara y se subira por tal de brindar una información correcta del
 proyecto "RADIUS"
 
 ## Documentación que puede encontrar a fecha de 23/04/2017:
-    +[Index Borrador](index.md)
-    +[De que trata el proyecto ?](doc_de_que_trata_el_proyecto.md)
+    + [Index Borrador](index.md)
+    + [De que trata el proyecto ?](doc_de_que_trata_el_proyecto.md)
     
     
     
