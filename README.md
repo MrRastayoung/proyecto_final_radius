@@ -8,8 +8,8 @@
 ![Daloradius](/img/daloradius.jpg)
 ![Python](/img/python.png)
 ![Raspbian](/img/raspbian.png)
-![Hypriot](/img/raspbian.png)
-![Docker](/img/raspbian.png)
+![Hypriot](/img/hypriot_0.png)
+![Docker](/img/docker.png)
 
 
 
