@@ -1,16 +1,15 @@
-#####  PROYECTO RADIUS 
+# RADIUS 
 ![FREERADCONECTION](/img/wpa-eaptls.gif)
 
-ldap
 Proyecto_final:
-  
+
   documentación_TOTAL:
   
     Proyecto:
       - De que trata el proyecto?
           - Una explicación de lo que se trata el proyecto y las tecnicas
             que se emplean
-      
+            
       Que puntos se van a tratar?:
         - Docker-Compose
         - Docker-File
