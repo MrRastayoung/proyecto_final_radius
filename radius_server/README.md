@@ -1,5 +1,5 @@
 # Freeradius Server
-
+![freeradius](../img/freeradius.png)
 ## Que encontramos en esta pagina?
  En esta pagina encontramos:
    Archivo Dockerfile
