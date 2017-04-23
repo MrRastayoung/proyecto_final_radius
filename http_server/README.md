@@ -1,0 +1,15 @@
+# Http Server
+
+## COMO ESTA MONTAdo
+
+## COMO ARRANCAR
+
+## VIRTUAL HOSTS
+
+## FRONTENDS
+### DALORADIUS
+### PhpMyadmin
+### PhpLdapadmin
+
+## IMPLEMENTACIONES
+### TLS/SSL COMUNICATION 
