@@ -22,9 +22,8 @@ __NOTA:__ no lo usaremos para radius aunque si veremos un annexo de como
 configurar freeradius con soporte de base de datos ( \_en el caso que de 
 tiempo y como complementario del proyecto ).
 
-  ***Freeradius***
-	
-  ***Daloradius***
+> ***Freeradius***
+> ***Daloradius***
 	
 *Ldap*: Servicio que contendra el arbol de directorio que utilizara ldap para
 authenticar los usuarios y los puntos de acceso ( en el caso que sea posible ).
