@@ -13,7 +13,7 @@
 ### Como esta ordenado
 
 ### Servicios y peculiaridades
-[FREERADIUS](/radius_Server/)
+[FREERADIUS](/radius_server/)
 [LDAP](/ldap_server/)
 [KERBEROS](/kerberos_server/)
 [HTTP](/http_server/)
