@@ -1,8 +1,20 @@
+
+#######
+#######
 # Proyecto final ASXI 2016-2017
+# Autor: Altair 
+# Fecha: 04/2017 
+# Archivo: docker-compose.yml
+#######
+#######
 
-#### Autor: Altair 
-#### Fecha: 04/2017-
+##  Modificaciones
+# 
+#
+#
+##
 
+# Versión que utiliza docker-compose
 version: '2'
 
 ## Servicios que componen este Docker-Compose
