@@ -2,15 +2,18 @@
 ![FREERADCONECTION](/img/wpa-eaptls.gif)
 
     Proyecto:
-      - De que trata el proyecto?
+      ##Documentación tecnica:
+      De que trata el proyecto?
           - Una explicación de lo que se trata el proyecto y las tecnicas
             que se emplean
             
       Que puntos se van a tratar?:
         - Docker-Compose
         - Docker-File
-        - Radiu
-        -
+        - Radius
+        - Ldap 
+        - Kerberos
+        - TLS/SSL
         
         Radius PRINCIPALMENTE:
           - PROTOCOLO
@@ -30,11 +33,11 @@
         - Puntos positivos del proyecto
         - Puntos negativos del proyecto
       
-      - Posibles mejoras i/o modificaciones del proyecto?
+      Posibles mejoras i/o modificaciones del proyecto?
       
-      - Valoración personal con el proyecto?
+      Valoración personal del proyecto?
     
-    Documentación Técnica:  
+    ## Documentación Practica:  
     
       radius_server:
         - Montar servidor
