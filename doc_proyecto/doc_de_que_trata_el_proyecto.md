@@ -23,6 +23,7 @@ configurar freeradius con soporte de base de datos ( \_en el caso que de
 tiempo y como complementario del proyecto ).
 
 > ***Freeradius***
+
 > ***Daloradius***
 	
 *Ldap*: Servicio que contendra el arbol de directorio que utilizara ldap para
