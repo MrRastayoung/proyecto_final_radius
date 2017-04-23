@@ -1,5 +1,5 @@
 #####  PROYECTO RADIUS 
-![FREERADCONECTION](./wpa-eaptls.gif)
+![FREERADCONECTION](/img/wpa-eaptls.gif)
 
 ldap
 Proyecto_final:
