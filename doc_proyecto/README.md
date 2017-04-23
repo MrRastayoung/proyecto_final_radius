@@ -24,7 +24,7 @@ proyecto "RADIUS"
 + DOCUMENTACIÓN PRACTICA:
 > + [Documentación practica](../FreeRadius_on_Docker_with_Raspberry.md)
 > + [Docker Radius](../radius_server/README.md)
-> + [Docker mysql + radius](../mysql_server/README.md)
+> + [Docker mysql + radius](mysql_server/README.md)
 > + [Docker kerberos ( falta información )](../kerberos_server/README.md)
 
     
