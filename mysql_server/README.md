@@ -1,5 +1,5 @@
 # MYSQL
-![mysql](/img/mysql.png)
+![mysql](../img/mysql.png)
 
 ## Servidor Mysql
 
