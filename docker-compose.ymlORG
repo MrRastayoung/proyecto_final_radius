@@ -1,0 +1,107 @@
+# Proyecto final ASXI 2016-2017
+
+#### Autor: Altair 
+#### Fecha: 04/2017-
+
+version: '2'
+
+services:
+
+    # Servidor FREERADIUS
+    radius: # Definir contenedor
+      container_name: server_radius
+      build:
+        context: radius_server
+      ports: # Mapeo de puertos
+        - "1812:1812"
+        - "1813:1813"
+      networks:
+        new-network:
+          ipv4_address: 172.18.0.2
+      links:
+        - mysql
+        - ldap
+        - kerberos
+      expose:
+        - "1812"
+      extra_hosts:
+        - "mysql:172.18.0.1"
+
+    # Servidor MYSQL
+    mysql:
+      container_name: server_mysql
+      build:
+        context: mysql_server
+      ports:
+        - "3306:3306"
+      expose:
+        - "3306"
+      networks:
+        new-network:
+          ipv4_address: 172.18.0.1
+
+    # Servidor LDAP
+    ldap:
+      container_name: server_ldap
+      build:
+        context: ldap_server
+      ports:
+        - "389:389"
+        - "636:636"
+      expose:
+        - "389"
+        - "636"
+      networks:
+        new-network:
+          ipv4_address: 172.18.0.3
+      links:
+       - kerberos
+
+    # Servidor KERBEROS
+    kerberos:
+      container_name: server_kerberos
+      build:
+        context: kerberos_server
+      ports:
+        - "464:464"
+        - "749:749"
+      expose:
+        - "464"
+        - "749"
+      networks:
+        new-network:
+          ipv4_address: 172.18.0.4
+
+    # Servidor WEB
+    http:
+      container_name: server_http
+      build:
+        context: http_server
+      ports:
+        - "80:80"
+        - "443:443"
+      expose:
+        - "80"
+        - "443"
+      networks:
+        new-network:
+          ipv4_address: 172.18.0.5
+      links:
+        - mysql
+    
+    # Autoridad certificadora
+    ca:
+      container_name: autoridad_certificadora
+      build:
+        context: ca_host
+      networks:
+        new-network:
+          ipv4_address: 172.18.0.6
+    
+networks:
+  new-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.18.0.0/24
+       #- gateway: 172.18.0.1

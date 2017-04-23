@@ -22,7 +22,7 @@ RUN apt-get update && apt-get install -y \
     vim \
     openssh-server
 
-RUN dpkg-reconfigure locales 
+#RUN dpkg-reconfigure locales 
 # && \locale-gen es_ES.UTF-8 UTF-8 && \
 #    /usr/sbin/update-locale LANG=es_ES.UTF-8
 
