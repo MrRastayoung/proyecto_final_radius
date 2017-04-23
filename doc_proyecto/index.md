@@ -1,10 +1,6 @@
 # RADIUS 
 ![FREERADCONECTION](/img/wpa-eaptls.gif)
 
-Proyecto_final:
-
-  documentación_TOTAL:
-  
     Proyecto:
       - De que trata el proyecto?
           - Una explicación de lo que se trata el proyecto y las tecnicas
