@@ -1,5 +1,5 @@
 # RADIUS 
-![FREERADCONECTION](/img/wpa-eaptls.gif)
+``Aqui y Ahora``
 
     Proyecto:
       ## Documentación tecnica:
