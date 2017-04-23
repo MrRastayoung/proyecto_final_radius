@@ -2,7 +2,7 @@
 ![FREERADCONECTION](/img/wpa-eaptls.gif)
 
     Proyecto:
-      ##Documentación tecnica:
+      ## Documentación tecnica:
       De que trata el proyecto?
           - Una explicación de lo que se trata el proyecto y las tecnicas
             que se emplean
