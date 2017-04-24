@@ -47,5 +47,5 @@ RUN mkdir /opt/docker
 CMD ["/bin/bash"]
 
 ## Puertos que se mapearan host:docker
-EXPOSE 1812
+EXPOSE 0.0.0.0:1812:1812
 

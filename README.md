@@ -6,10 +6,12 @@
 ![OpenLdap](/img/openldap.png)
 ![Kerberos](/img/kerberos_mit.png)
 ![Daloradius](/img/daloradius.jpg)
+![Mysql](/img/mysql.jpg)
+![Tls/ssl](/img/tls_ssl.png)
 ![Python](/img/python.png)
 ![Raspbian](/img/raspbian.png)
-![Hypriot](/img/raspbian.png)
-![Docker](/img/raspbian.png)
+![Hypriot](/img/hypriot_0.png)
+![Docker](/img/docker.png)
 
 
 
