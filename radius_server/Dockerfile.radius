@@ -5,7 +5,7 @@
 # destinados a la administración o conexion de los servicios posibles tales como,
 # Daloradius, PhpMyadmin ( si se da el caso ), PhpLdapadmin, HotSpot
 
-## Imagen que se utilizara 
+## Imagen que se utilizara, en este caso el proyecto se monta sobre una raspberry 3 B
 FROM resin/rpi-raspbian
 
 ## Persona responsable del docker
@@ -29,16 +29,12 @@ RUN apt-get update && apt-get install -y \
 ## Directorios  
 RUN mkdir /opt/docker
 
-## Variables de entorno 
-#ENV LC_ALL es_ES.UTF-8
-
 # Ficheros INFO AND PROFILE
-#COPY * /opt/docker/
-#COPY bash_profile /root/.bash_profile
+COPY conf_file /opt/docker/
 
 # Ficheros CONF
-#COPY ../users /etc/freeradius/
-#COPY ../radiusd.conf /etc/freeradius/
+COPY /opt/docker/conf_file/users /etc/freeradius/
+COPY /opt/docker/conf_file/radiusd.conf /etc/freeradius/
 
 ## COMANDO QUE SE EJECUTARA CUANDO SE ACABE DE CREAR EL DOCKER
 #ENTRYPOINT [“/bin/cat”]
@@ -46,6 +42,8 @@ RUN mkdir /opt/docker
 ## Comando que se ejecutara al crear el docker
 CMD ["/bin/bash"]
 
+ENTRYPOINT /etc/init/freeradius -X & /bin/bash
+
 ## Puertos que se mapearan host:docker
-EXPOSE 0.0.0.0:1812:1812
+EXPOSE 1812 1813
 
