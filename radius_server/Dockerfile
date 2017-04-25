@@ -27,7 +27,6 @@ COPY conf_files /opt/docker/
 # Ficheros CONF trabajamos desde dentro del docker ( RUN )
 RUN cp /opt/docker/conf_files/users /etc/freeradius/
 
-
 ## COMANDO QUE SE EJECUTARA CUANDO SE ACABE DE CREAR EL DOCKER
 #ENTRYPOINT ["/"]
 
