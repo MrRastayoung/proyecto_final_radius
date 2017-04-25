@@ -15,24 +15,21 @@ MAINTAINER "Altair version: 01"
 RUN apt-get update && apt-get install -y \
     freeradius \
     freeradius-utils \
-    locales \
     net-tools \
-    nmap \
-    vim \
     openssh-server
 
-## Directorios  
+## Directorios interno
 RUN mkdir /opt/docker
 
-# Ficheros INFO AND PROFILE
+# Copiamos archivos desde fuera adentro del docker ( COPY )
 COPY conf_files /opt/docker/
 
-# Ficheros CONF
-COPY /opt/docker/conf_files/users /etc/freeradius/
-COPY /opt/docker/conf_files/radiusd.conf /etc/freeradius/
+# Ficheros CONF trabajamos desde dentro del docker ( RUN )
+RUN cp /opt/docker/conf_files/users /etc/freeradius/
+
 
 ## COMANDO QUE SE EJECUTARA CUANDO SE ACABE DE CREAR EL DOCKER
-#ENTRYPOINT [“/bin/cat”]
+#ENTRYPOINT ["/"]
 
 ## Comando que se ejecutara al crear el docker
 CMD ["/bin/bash"]
