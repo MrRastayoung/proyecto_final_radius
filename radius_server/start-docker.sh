@@ -8,3 +8,5 @@
 
 ### Docker build apartir de un dockerfile
 
+### Arrancar container con tiempo de vida
+docker run --rm -it -v hello:/world busybox sh
