@@ -16,7 +16,7 @@ RUN apt-get update && apt-get install -y \
     freeradius \
     freeradius-utils \
     net-tools \
-    openssh-server
+    openssh-server; # limpiar cache falta cmd
 
 ## Directorios interno
 RUN mkdir /opt/docker
@@ -25,7 +25,7 @@ RUN mkdir /opt/docker
 COPY conf_files /opt/docker/
 
 # Ficheros CONF trabajamos desde dentro del docker ( RUN )
-RUN cp /opt/docker/conf_files/users /etc/freeradius/
+COPY conf_files/users /etc/freeradius/
 
 ## COMANDO QUE SE EJECUTARA CUANDO SE ACABE DE CREAR EL DOCKER
 #ENTRYPOINT ["/"]
@@ -38,3 +38,4 @@ ENTRYPOINT /etc/init/freeradius -X & /bin/bash
 ## Puertos que se mapearan host:docker
 EXPOSE 1812 1813
 
+# vim:fileencoding=utf8

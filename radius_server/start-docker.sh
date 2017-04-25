@@ -9,5 +9,5 @@
 ### Docker build apartir de un dockerfile
 docker build -t proyecto_final/radius .
 
-### Arrancar container con tiempo de vida
-#docker run --rm -id -v proyecto_final/radius bash
+### Arrancar container con tiempo de vida limitado
+docker run --rm --name radius -id proyecto_final/radius
