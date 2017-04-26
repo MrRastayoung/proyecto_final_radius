@@ -12,7 +12,9 @@ FROM resin/rpi-raspbian
 MAINTAINER "Altair version: 01"
 
 ## Actualizar repositorios e instalar paquetes necesarios
-RUN apt-get update -qq && apt-get install -qq -y --auto-remove freeradius freeradius-utils  net-tools  openssh-server; apt-get clean all
+#RUN apt-get update -qq && apt-get install -qq -y --auto-remove freeradius freeradius-utils  net-tools  openssh-server; apt-get clean all
+
+RUN apt-get update && apt-get install -qq --auto-remove freeradius freeradius-utils && apt-get clean all; exit 0
 
 ## Directorios interno
 RUN mkdir /opt/docker
@@ -27,9 +29,10 @@ COPY conf_files/users /etc/freeradius/
 WORKDIR /opt/docker
 
 ## Comando que se ejecutara al crear el docker
+CMD ["freeradius -X"]
 
-ENTRYPOINT freeradius -X 
- 
+ENTRYPOINT service freeradius start && /bin/bash
+
 ## Puertos que se mapearan host:docker
 EXPOSE 1812 1813
 

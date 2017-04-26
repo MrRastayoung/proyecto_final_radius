@@ -7,4 +7,4 @@ CONTAINER_NAME=radius
 REPOSITORI_IMAGE="proyecto_final/radius"
 
 ### Arrancar container con tiempo de vida limitado
-docker run --rm --name $CONTAINER_NAME -id $REPOSITORI_IMAGE
+docker run --rm --name $CONTAINER_NAME -it $REPOSITORI_IMAGE /bin/bash
