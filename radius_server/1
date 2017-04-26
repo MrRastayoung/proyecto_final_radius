@@ -12,11 +12,11 @@ FROM resin/rpi-raspbian
 MAINTAINER "Altair version: 01"
 
 ## Actualizar repositorios e instalar paquetes necesarios
-RUN apt-get update -qq && apt-get install -qq -y --auto-remove \
+RUN apt-get update && apt-get install -y \
     freeradius \
     freeradius-utils \
     net-tools \
-    openssh-server; apt-get clean all # limpiar cache falta cmd
+    openssh-server; apt-get # limpiar cache falta cmd
 
 ## Directorios interno
 RUN mkdir /opt/docker

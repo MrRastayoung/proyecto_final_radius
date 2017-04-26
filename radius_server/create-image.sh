@@ -6,6 +6,7 @@
 ### Con el, ir construyendo y elaborando una serie
 ### de comprobaciones automaticas para saber que todo funciona correctamente
 
+REPOSITORI_IMAGE="proyecto_final/radius"
 
 ### Docker build apartir de un dockerfile
-docker build -t proyecto_final/radius .
+docker build -t $REPOSITORI_IMAGE .
