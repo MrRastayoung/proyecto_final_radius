@@ -28,13 +28,13 @@ COPY conf_files /opt/docker/
 COPY conf_files/users /etc/freeradius/
 
 ## COMANDO QUE SE EJECUTARA CUANDO SE ACABE DE CREAR EL DOCKER
-#ENTRYPOINT ["/"]
+WORKDIR /opt/docker
 
 ## Comando que se ejecutara al crear el docker
-CMD ["/bin/bash"]
+#CMD ["/bin/bash"]
 
-ENTRYPOINT /etc/init/freeradius -X & /bin/bash
-
+ENTRYPOINT /etc/init/freeradius -X && /bin/bash
+ 
 ## Puertos que se mapearan host:docker
 EXPOSE 1812 1813
 
