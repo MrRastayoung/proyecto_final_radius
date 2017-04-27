@@ -1,0 +1,17 @@
+FROM resin/rpi-raspbian
+MAINTAINER " Altair version 0.1
+
+RUN apt-get update && apt-get install -qq --auto-remove freeradius-mysql mysql-server && apt-get clean all; exit 0
+
+# Copiando archivos de configuración
+RUN mkdir /opt/docker
+COPY conf_files /opt/docker
+
+# Configurando servicio
+
+## Puertos que se mapearan host:docker
+EXPOSE 3306 
+
+ENTRYPOINT /bin/bash
+## Comando que se ejecutara al crear el docker
+

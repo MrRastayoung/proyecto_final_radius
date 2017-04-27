@@ -1,20 +1,20 @@
 FROM resin/rpi-raspbian
 MAINTAINER " Altair version 0.1
 
-RUN apt-get update && apt-get install \
-    mysql-server \
-    freeradius-mysql
+RUN apt-get update && apt-get install -y -qq mysql-server; exit 0
 
-# Copiando archivos de configuración
 RUN mkdir /opt/docker
+
 COPY conf_files /opt/docker
 
-# Configurando servicio
-RUN cp /opt/docker/conf_files/
+COPY /opt/docker/my.cnf /etc/mysql/
 
-## Puertos que se mapearan host:docker
-EXPOSE 1812 1813
 
-## Comando que se ejecutara al crear el docker
-CMD ["/bin/bash"]
+RUN mysql -u root -p \echo  "mysql -e 'GRANT ALL PRIVILEGES ON *.* TO \"root\"@\"%\" WITH GRANT OPTION;'"
 
+
+WORKDIR /opt/docker
+
+EXPOSE 3306/tcp
+
+ENTRYPOINT /usr/bin/mysqld_safe && /bin/bash

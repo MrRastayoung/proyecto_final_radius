@@ -24,6 +24,7 @@ COPY conf_files /opt/docker/
 
 # Ficheros CONF trabajamos desde dentro del docker ( RUN )
 COPY conf_files/users /etc/freeradius/
+COPY conf_files/radiusd.conf /etc/freeradius
 
 ## COMANDO QUE SE EJECUTARA CUANDO SE ACABE DE CREAR EL DOCKER
 WORKDIR /opt/docker
