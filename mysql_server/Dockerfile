@@ -24,8 +24,15 @@ RUN chmod 755 /sbin/entrypoint.sh
 RUN mkdir /opt/docker
 COPY conf_files /opt/docker/
 COPY conf_files/my.cnf /etc/mysql/
+#WORKDIR /opt/docker
+CMD ["/usr/bin/mysqld_safe"]
+RUN chmod +x /opt/docker/insert_bd.sh
+RUN /opt/docker/insert_bd.sh
+
+## RUN SCRIPT BD RADIUS DALORADIUS ETC
 
 EXPOSE 3306/tcp
 VOLUME ["${MYSQL_DATA_DIR}", "${MYSQL_RUN_DIR}"]
 ENTRYPOINT ["/sbin/entrypoint.sh"]
+
 CMD ["/usr/bin/mysqld_safe"]

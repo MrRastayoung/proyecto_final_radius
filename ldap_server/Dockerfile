@@ -1,4 +1,6 @@
 FROM armv7/armhf-fedora
-MAINTAINER " Altair version 0.1
 
+MAINTAINER " Altair LDAP version 0.1
 
+###
+RUN apt-update 
