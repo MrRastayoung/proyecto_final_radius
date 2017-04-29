@@ -7,4 +7,15 @@ CONTAINER_NAME=radius
 REPOSITORI_IMAGE="proyecto_final/radius"
 
 ### Arrancar container con tiempo de vida limitado
+/bin/echo "CREANDO CONTENEDOR"
 docker run --rm --name $CONTAINER_NAME -id $REPOSITORI_IMAGE /bin/bash
+
+### PID DEL SERVICIO
+docker exec -it radius ps -ax
+### Comando de test 
+/bin/echo "Comprobando test 1 usuario local"
+docker exec -it $CONTAINER_NAME radtest altair testing localhost 1812 testing123
+
+
+### ELIMINANDO CONTENEDOR
+docker stop $CONTAINER_NAME

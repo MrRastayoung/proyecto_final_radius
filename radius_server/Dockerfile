@@ -5,34 +5,32 @@
 # destinados a la administración o conexion de los servicios posibles tales como,
 # Daloradius, PhpMyadmin ( si se da el caso ), PhpLdapadmin, HotSpot
 
-## Imagen que se utilizara, en este caso el proyecto se monta sobre una raspberry 3 B
 FROM resin/rpi-raspbian
 
-## Persona responsable del docker
-MAINTAINER "Altair version: 01"
+MAINTAINER "Altair version: 0.1"
 
-## Actualizar repositorios e instalar paquetes necesarios
-#RUN apt-get update -qq && apt-get install -qq -y --auto-remove freeradius freeradius-utils  net-tools  openssh-server; apt-get clean all
+RUN apt-get update &&\
+ apt-get install -qq --auto-remove\
+ freeradius\
+ freeradius-mysql\
+ freeradius-utils &&\
+ apt-get clean all; exit 0
 
-RUN apt-get update && apt-get install -qq --auto-remove freeradius freeradius-utils && apt-get clean all; exit 0
-
-## Directorios interno
 RUN mkdir /opt/docker
 
-# Copiamos archivos desde fuera adentro del docker ( COPY )
-COPY conf_files /opt/docker/
-
-# Ficheros CONF trabajamos desde dentro del docker ( RUN )
-COPY conf_files/users /etc/freeradius/
-COPY conf_files/radiusd.conf /etc/freeradius
-
-## COMANDO QUE SE EJECUTARA CUANDO SE ACABE DE CREAR EL DOCKER
 WORKDIR /opt/docker
 
-## Comando que se ejecutara al crear el docker
-CMD ["freeradius -X"]
+COPY conf_files/users /etc/freeradius/
+COPY conf_files/radiusd.conf /etc/freeradius/
+COPY startup.sh /opt/docker/
+RUN chmod +x /opt/docker/startup.sh
 
-ENTRYPOINT service freeradius start && /bin/bash
+#COPY conf_files/sql.conf /etc/freeradius/
+#COPY conf_files/nas.sql /etc/freeradius/sql/
+
+CMD freeradius -X || echo "mal"
+
+ENTRYPOINT service freeradius start & /bin/bash
 
 ## Puertos que se mapearan host:docker
 EXPOSE 1812 1813
