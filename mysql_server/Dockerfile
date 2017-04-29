@@ -24,10 +24,11 @@ COPY conf_files/entrypoint.sh /sbin/entrypoint.sh
 COPY conf_files/insert_bd.sh /opt/docker/
 RUN chmod 755 /sbin/entrypoint.sh; chmod 755 /opt/docker/insert_bd.sh 
 
-RUN /bin/bash -c "/sbin/entrypoint.sh &" && \ 
+RUN /bin/bash -c "/sbin/entrypoint.sh &" && \
+  ps -ax && \ 
   sleep 20s && \
-  mysql -e "create user 'zabbix'@'localhost';" && \
-  mysql -e "create database zabbix;" 
+  mysql -e "create user 'radius'@'localhost';" && \
+  mysql -e "create database radius;" 
 
 EXPOSE 3306/tcp
 VOLUME ["${MYSQL_DATA_DIR}", "${MYSQL_RUN_DIR}"]
