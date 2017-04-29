@@ -24,10 +24,10 @@ COPY conf_files/entrypoint.sh /sbin/entrypoint.sh
 COPY conf_files/insert_bd.sh /opt/docker/
 RUN chmod 755 /sbin/entrypoint.sh; chmod 755 /opt/docker/insert_bd.sh 
 
-RUN  /bin/bash -c "/usr/bin/mysqld_safe >/dev/null 2>&1 &" 
-RUN  sleep 1m 
-  #### Insertar las bases de datos de los servicios que necesitamos
-RUN  mysql -uroot -e "CREATE DATABASE radius; CREATE USER 'radius'@'%' IDENTIFIED BY 'radius'; GRANT ALL PRIVILEGES ON * . * TO 'radius'@'localhost'; " 
+RUN /bin/bash -c "/sbin/entrypoint.sh &" && \ 
+  sleep 20s && \
+  mysql -e "create user 'zabbix'@'localhost';" && \
+  mysql -e "create database zabbix;" 
 
 EXPOSE 3306/tcp
 VOLUME ["${MYSQL_DATA_DIR}", "${MYSQL_RUN_DIR}"]
