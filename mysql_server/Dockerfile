@@ -27,6 +27,7 @@ RUN chmod 755 /sbin/entrypoint.sh; chmod 755 /opt/docker/insert_bd.sh
 RUN /bin/bash -c "/sbin/entrypoint.sh &" && \
   ps -ax && \ 
   sleep 20s && \
+ /bin/echo "Insertando bases de datos"
   mysql -e "create user 'radius'@'localhost';" && \
   mysql -e "create database radius;" 
 
