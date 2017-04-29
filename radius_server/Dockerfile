@@ -28,9 +28,9 @@ RUN chmod +x /opt/docker/startup.sh
 #COPY conf_files/sql.conf /etc/freeradius/
 #COPY conf_files/nas.sql /etc/freeradius/sql/
 
-CMD freeradius -X || echo "mal"
+CMD freeradius -X 
 
-ENTRYPOINT service freeradius start & /bin/bash
+ENTRYPOINT service freeradius start && /bin/bash 
 
 ## Puertos que se mapearan host:docker
 EXPOSE 1812 1813

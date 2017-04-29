@@ -1,38 +1,35 @@
+# Nos basamos en una imagen para procesadores ARM, esta concretamente para raspberry 
 FROM resin/rpi-raspbian
-MAINTAINER " Altair version 0.1
 
+# Persona encargada de esta imagen
+MAINTAINER Altair Fernandez Castro Version 0.1
 
-### SOURCE
-
-# https://github.com/sameersbn/docker-mysql
-
-
+#####    IMAGEN    #####
+#RUN echo "mysql-server-5.5 mysql-server/root_password password myjupiter" | debconf-set-selections && \
+#  echo "mysql-server-5.5 mysql-server/root_password_again password myjupiter" | debconf-set-selections && \
+#  echo "mysql-server-5.5 mysql-server-5.5/postrm_remove_databases boolean true" | debconf-set-selections  
 
 ENV MYSQL_USER=mysql \
     MYSQL_DATA_DIR=/var/lib/mysql \
     MYSQL_RUN_DIR=/run/mysqld \
     MYSQL_LOG_DIR=/var/log/mysql
 
-RUN apt-get update -qq \
+RUN apt-get update \
  && DEBIAN_FRONTEND=noninteractive apt-get install -y -qq mysql-server \
  && rm -rf ${MYSQL_DATA_DIR} \
  && rm -rf /var/lib/apt/lists/*
 
-COPY entrypoint.sh /sbin/entrypoint.sh
-RUN chmod 755 /sbin/entrypoint.sh
-
 RUN mkdir /opt/docker
-WORKDIR /opt/docker
-
-COPY conf_files/my.cnf /etc/mysql/
+COPY conf_files/entrypoint.sh /sbin/entrypoint.sh
 COPY conf_files/insert_bd.sh /opt/docker/
+RUN chmod 755 /sbin/entrypoint.sh; chmod 755 /opt/docker/insert_bd.sh 
 
-RUN chmod +x /opt/docker/insert_bd.sh && sh -c /opt/docker/inser_bd.sh
-
-## RUN SCRIPT BD RADIUS DALORADIUS ETC
+RUN  /bin/bash -c "/usr/bin/mysqld_safe >/dev/null 2>&1 &" 
+RUN  sleep 1m 
+  #### Insertar las bases de datos de los servicios que necesitamos
+RUN  mysql -uroot -e "CREATE DATABASE radius; CREATE USER 'radius'@'%' IDENTIFIED BY 'radius'; GRANT ALL PRIVILEGES ON * . * TO 'radius'@'localhost'; " 
 
 EXPOSE 3306/tcp
 VOLUME ["${MYSQL_DATA_DIR}", "${MYSQL_RUN_DIR}"]
 ENTRYPOINT ["/sbin/entrypoint.sh"]
-
-CMD ["/usr/sbin/mysqld_safe"]
+CMD ["/usr/bin/mysqld_safe"]

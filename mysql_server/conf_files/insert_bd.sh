@@ -4,6 +4,8 @@
 ## base de datos radius + mysql
 USERDB_ADMIN_RADIUS=radius
 USERDB_PASS_RADIUS=radius
+DATTABASE_NAME=radius
 
-# 1 CREATE DB
-mysql -uroot -e "CREATE DATABASE tutorial_database; CREATE USER "$USERDB_ADMIN_RADIUS"@'%' IDENTIFIED BY 'radius'; GRANT ALL PRIVILEGES ON * . * TO 'nombre_usuario'@'localhost'; "
+
+
+mysql -uroot -e "CREATE DATABASE radius; CREATE USER 'radius'@'%' IDENTIFIED BY 'radius'; GRANT ALL PRIVILEGES ON * . * TO 'radius'@'localhost'; "
