@@ -1,4 +1,5 @@
 # Nos basamos en una imagen para procesadores ARM, esta concretamente para raspberry 
+#fi
 FROM resin/rpi-raspbian
 
 # Persona encargada de esta imagen
