@@ -26,18 +26,19 @@ WORKDIR /opt/docker
 COPY conf_files/users /etc/freeradius/
 COPY conf_files/radiusd.conf /etc/freeradius/
 COPY conf_files/sql.conf /etc/freeradius/sql.conf
-COPY conf_files/default /etc/freeradius/
-COPY startup.sh /opt/docker/
-RUN chmod +x /opt/docker/startup.sh
+COPY conf_files/default /etc/freeradius/sites-available/
+ADD conf_files/startup.sh /startup.sh
+RUN chmod +x /startup.sh
 
 #COPY conf_files/sql.conf /etc/freeradius/
 #COPY conf_files/nas.sql /etc/freeradius/sql/
 
-CMD freeradius -X 
+#ENTRYPOINT service freeradius start && /bin/bash 
 
-ENTRYPOINT service freeradius start && /bin/bash 
+ENTRYPOINT ["/startup.sh"]
+#CMD ["freeradius -X"]
 
 ## Puertos que se mapearan host:docker
-EXPOSE 1812 1813
+EXPOSE 1812/udp 1813
 
 # vim:fileencoding=utf8

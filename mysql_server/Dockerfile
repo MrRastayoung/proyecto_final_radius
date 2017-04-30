@@ -40,7 +40,7 @@ RUN chmod 755 /opt/docker/startup.sh; chmod 755 /opt/docker/conf_files/bd_insert
   ### SCRIPT DALORADIUS
 
 EXPOSE 3306/tcp
-VOLUME ["${MYSQL_DATA_DIR}", "${MYSQL_RUN_DIR}"]
+VOLUME ["/var/lib/mysql", "/run/mysqld"]
 
 WORKDIR /opt/docker
 ENTRYPOINT ["/opt/docker/startup.sh"]
