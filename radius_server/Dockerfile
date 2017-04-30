@@ -13,7 +13,10 @@ RUN apt-get update &&\
  apt-get install -qq --auto-remove\
  freeradius\
  freeradius-mysql\
- freeradius-utils &&\
+ freeradius-utils \
+ iputils-ping \
+ nmap \
+ net-tools && \
  apt-get clean all; exit 0
 
 RUN mkdir /opt/docker

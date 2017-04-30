@@ -16,7 +16,7 @@ docker exec -it $CONTAINER_NAME ps -ax
 /bin/echo "Comprobando test 1 usuario local\n"
 docker exec -it $CONTAINER_NAME radtest altair testing localhost 1812 testing123
 
-docker exec -it $CONTAINER_NAME radtest usuario1 usuario1 172.18.0.1 1812 testing123
+docker exec -it $CONTAINER_NAME radtest usuario1 usuario1 172.18.0.3 1812 testing123
 
 ### ELIMINANDO CONTENEDOR
 /bin/echo "Eliminando container"
