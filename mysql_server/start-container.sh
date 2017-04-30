@@ -12,7 +12,7 @@ mkdir -p /opt/mysql/data
 
 /bin/echo "Arrancando container en BACKGROUND"
 #docker run --rm --name $CONTAINER_NAME -id $REPOSITORI_IMAGE -v /opt/mysql/data:/var/lib/mysql 
-docker run --name $CONTAINER_NAME -id $REPOSITORI_IMAGE -v /opt/mysql/data:/var/lib/mysql
+docker run --rm --name $CONTAINER_NAME -p 3306:3306 --net network_proyecto_final/radius --ip 172.18.0.2 -id $REPOSITORI_IMAGE -v /opt/mysql/data:/var/lib/mysql
 sleep 10s
 clear
 #################################################
@@ -48,7 +48,7 @@ clear
 #################################################
 
 /bin/echo "Seleccionando la base de datos insertada"
-docker exec -it $CONTAINER_NAME mysql -uroot -e "use radius;show tables;"
+docker exec -it $CONTAINER_NAME mysql -uroot -e "use radius;select * from radcheck;"
 sleep 5s
 clear
 #################################################

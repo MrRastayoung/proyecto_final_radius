@@ -8,4 +8,4 @@ DATTABASE_NAME=radius
 
 
 
-mysql -uroot -e "CREATE DATABASE radius; CREATE USER 'radius'@'%' IDENTIFIED BY 'radius'; GRANT ALL PRIVILEGES ON * . * TO 'radius'@'localhost'; "
+mysql -uroot -p -e "CREATE DATABASE radius; CREATE USER 'radius'@'%' IDENTIFIED BY 'radius'; GRANT ALL PRIVILEGES ON * . * TO 'radius'@'localhost'; "
