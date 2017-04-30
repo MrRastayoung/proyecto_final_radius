@@ -41,12 +41,6 @@ clear
 #clear
 #################################################
 
-/bin/echo "Mostrando las bases de datos de nuevo"
-docker exec -it $CONTAINER_NAME mysql -uroot -e "show databases;"
-sleep 5s
-clear
-#################################################
-
 /bin/echo "Seleccionando la base de datos insertada"
 docker exec -it $CONTAINER_NAME mysql -uroot -e "use radius;select * from radcheck;"
 sleep 5s

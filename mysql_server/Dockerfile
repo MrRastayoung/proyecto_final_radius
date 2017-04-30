@@ -25,7 +25,6 @@ COPY conf_files/bd_insert.sh /opt/docker/conf_files/
 RUN /bin/ls -la /opt/docker/conf_files
 
 COPY conf_files/my.cnf /etc/mysql/
-#COPY conf_files/entrypoint.sh /sbin/entrypoint.sh
 COPY conf_files/startup.sh /opt/docker/
 
 #RUN chmod 755 /sbin/entrypoint.sh

@@ -22,6 +22,8 @@ WORKDIR /opt/docker
 
 COPY conf_files/users /etc/freeradius/
 COPY conf_files/radiusd.conf /etc/freeradius/
+COPY conf_files/sql.conf /etc/freeradius/sql.conf
+COPY conf_files/default /etc/freeradius/
 COPY startup.sh /opt/docker/
 RUN chmod +x /opt/docker/startup.sh
 

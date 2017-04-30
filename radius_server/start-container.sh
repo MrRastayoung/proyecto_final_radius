@@ -8,7 +8,7 @@ REPOSITORI_IMAGE="proyecto_final/radius"
 
 ### Arrancar container con tiempo de vida limitado
 /bin/echo "CREANDO CONTENEDOR"
-docker run --rm --name $CONTAINER_NAME -id $REPOSITORI_IMAGE /bin/bash
+docker run --rm --name $CONTAINER_NAME -p 1812:1812 -p 1813:1813 --net network_proyecto_final/radius --ip 172.18.0.3 --link mysql:mysql -id $REPOSITORI_IMAGE /bin/bash
 
 ### PID DEL SERVICIO
 docker exec -it $CONTAINER_NAME ps -ax
@@ -16,6 +16,8 @@ docker exec -it $CONTAINER_NAME ps -ax
 /bin/echo "Comprobando test 1 usuario local\n"
 docker exec -it $CONTAINER_NAME radtest altair testing localhost 1812 testing123
 
+docker exec -it $CONTAINER_NAME radtest usuario1 usuario1 172.18.0.1 1812 testing123
+
 ### ELIMINANDO CONTENEDOR
 /bin/echo "Eliminando container"
-docker stop $CONTAINER_NAME
+#docker stop $CONTAINER_NAME
