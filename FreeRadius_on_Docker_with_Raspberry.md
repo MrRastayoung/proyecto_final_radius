@@ -526,7 +526,7 @@ DOCKER
 
 
 [DOCKER COMPOSE VIDEO](https://www.youtube.com/watch?v=gtoT0By8yh4)
-
+[DOCKER RESTART POLICY](https://blog.codeship.com/ensuring-containers-are-always-running-with-dockers-restart-policy/)
 
 
 

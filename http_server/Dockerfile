@@ -23,6 +23,8 @@ COPY conf_files/php.ini /etc/php5/apache2/
 RUN mkdir /var/log/php 
 RUN chown www-data /var/log/php
 
-RUN sudo service apache2 restart
+RUN sudo service apache2 restart 2&1 &>/dev/null
+
+EXPOSE 80 443
 
 ENTRYPOINT ["/bin/bash"]

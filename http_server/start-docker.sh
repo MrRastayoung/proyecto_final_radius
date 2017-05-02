@@ -17,3 +17,7 @@ docker run --rm --name $CONTAINER_NAME -p 80:80 -p 443:443 --net network_proyect
 sleep 5s
 clear
 
+
+docker exec -it $CONTAINER_NAME ps -ax
+sleep 5s
+clear
