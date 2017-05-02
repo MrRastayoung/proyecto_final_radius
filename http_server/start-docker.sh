@@ -21,3 +21,9 @@ clear
 docker exec -it $CONTAINER_NAME ps -ax
 sleep 5s
 clear
+
+docker exec -it $CONTAINER_NAME apachectl -S
+sleep 5s
+clear
+
+
