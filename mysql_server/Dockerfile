@@ -40,6 +40,7 @@ RUN chmod 755 /opt/docker/startup.sh; chmod 755 /opt/docker/conf_files/bd_insert
   killall mysqld ;exit 0
   ### SCRIPT DALORADIUS
 
+
 EXPOSE 3306/tcp
 VOLUME ["/var/lib/mysql", "/run/mysqld"]
 

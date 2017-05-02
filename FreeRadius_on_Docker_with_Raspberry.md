@@ -301,6 +301,35 @@ Permitiendo consultas SQL
         #  See "Accounting queries" in sql.conf
         sql
 	``
+
+ACTUALIZACIÓN:
+	
+	RADIUS + MYSQL
+	1. En la sección ``sesion`` y ``post-auth`` descomentar las lineas ``sql`` tambien.
+		1. Fichero: **/etc/freeradius/sites-available/defaul**.
+		NOTA: si comentamos en authorize **file** no podremos acceder a radius con usuarios locales
+
+	2. Se abre "inner-tunnel" para que funcione correctamente la conexion con los puntos de acceso.
+		1. Fichero: **/etc/freeradius/sites-available/inner-tunnel **
+			Sección: ``authorize`` descomentamos sql
+		2. Añadimos los puntos de acceso que conectemos a nuestra instalación:
+			Fichero: **/etc/freeradius/clients.conf**
+			NOTA: __Añadiremos todos los puntos de acceso que formen nuestra red__.
+			
+			``
+			client 172.18.0.10 { secret = secret_cliente_ap1
+						shotname = Zion_RADIUS }
+			``
+		3. Reinicio del servicio en depuración:
+			1. Paramos el servicio:
+				sudo service freeradius stop
+			2. Reiniciamos en modo depuración:
+				freeradius -X
+			NOTA: __En los siguientes reinicios utilizaremos__**service freeradius restart**
+
+		4. Testear con un usuario remoto
+
+
 	
 	Bien ahora ya tenemos radius conectado a mysql, pero no tenemos
 	usuarios en nuestra bd de mysql así que los añadiremos.
@@ -366,7 +395,7 @@ ahora nos interesa que freeradius autentique clientes remotos
 
 
 
-INSERT INTO nas (nasname, shortname, type, secret) VALUES ('172.17.0.5', 'servidor', 'other', 'radius');
+INSERT INTO nas (nasname, shortname, type, secret) VALUES ('172.18.0.3', 'servidor', 'other', 'radius');
 
 
 

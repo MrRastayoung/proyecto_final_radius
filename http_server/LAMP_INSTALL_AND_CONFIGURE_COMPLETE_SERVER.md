@@ -162,6 +162,62 @@ nuestros propios scripts y cualquier **framwork** de desarollo.
 
 ### 5. Reiniciar Apache:
 
+	1. sudo service apache2 restart
+
+
+
+## Daloradius
+
+Frontend con el que podremos administrar freeradius basado en msyql.
+
+### 1. Daloradius instalar y configurar:
+
+	NOTA: __Instalaremos paquetes necesarios en el caso que no esten instalados en nuestro sistema__.
+
+	1. sudo apt-get install 
+
+### 2. Descargar Daloradius:
+	1. wget http://sourceforge.net/projects/daloradius/files/daloradius/daloradius0.9-9/daloradius-0.9-9.tar.gz
+	2. tar zxvf daloradius-0.9-9.tar.gz
+
+### 3. Importart los esquemas a la base de datos de **radius**:
+
+	NOTA: __Nos conectaremos al servidor de base de datos para añadir los esquemas de daloradius atentos 
+	con las conexiones, y como se definio el usuario administrador de la base de datos, nos podría dar problemas__.
+
+	1. mysql -uradius -p radius < daloradius-0.9-9/contrib/db/fr2-mysql-daloradius-and-freeradius.sql
+
+### 4. Configurar el usuario y password de la base de datos de radius en daloradius:
+	
+	Fichero: **daloradius-0.9-9/library/daloradius.conf.php**
+
+	``
+	$configValues['CONFIG_DB_ENGINE'] = 'mysql';
+	$configValues['CONFIG_DB_HOST'] = '172.18.0.2';
+	$configValues['CONFIG_DB_PORT'] = '3306';
+	$configValues['CONFIG_DB_USER'] = 'radius';
+	$configValues['CONFIG_DB_PASS'] = 'radius';
+	$configValues['CONFIG_DB_NAME'] = 'radius';
+	``
+
+### 5. Publicar Daloradius:
+
+	NOTA: __ Moveremos de lugar el directorio que hemos obtenido despues de descomprimir el paquete de Daloradius,
+	por tal de ponerlo en el directorio apropiado de nuestro servidor web__.
+
+	1. sudo mv daloradius-0.9-9 /var/www/html/daloradius
+
+	INFO: __ Podemos instalar __ **phpmyadmin** __ eligiendo apache2 como servidor web, y elegir__ **NO** 
+	__si nos pregunta a cerca  de configurar alguna base de datos...__.
+
+
+### 6. Comprobando el funcionamiento:
+
+	1. http://172.18.0.4/daloradius
+	2. http://zion.com/daloradius
+
+	INFO: __El usuario y la contraseña de acceso es__ **administrator** y **radius**
+
 INFO: [Apache Multiprocesamiento](http://www.vozidea.com/diferencias-entre-apache-prefork-event-worker)
 INFO: [LAMP Server](https://www.linode.com/docs/web-servers/lamp/lamp-on-debian-8-jessie)
 

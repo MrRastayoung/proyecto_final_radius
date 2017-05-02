@@ -167,7 +167,7 @@ authorize {
 
 	#
 	#  Read the 'users' file
-	files
+#	files
 
 	#
 	#  Look in an SQL database.  The schema of the database

@@ -17,7 +17,7 @@ rm -rf /var/lib/apt/lists/*
 
 EXPOSE 389
 
-#CMD slapd -h 'ldap:/// ldapi:///' -g openldap -u openldap -F /etc/ldap/slapd.d -d stats
+CMD slapd -h 'ldap:/// ldapi:///' -g openldap -u openldap -F /etc/ldap/slapd.d -d stats
 
 #ENTRYPOINT slapd -h 'ldap:/// ldapi:///' -g openldap -u openldap -F /etc/ldap/slapd.d -d stats && /bin/bash
 

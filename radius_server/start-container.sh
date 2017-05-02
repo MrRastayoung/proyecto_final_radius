@@ -21,7 +21,7 @@ clear
 
 ### Comandos de test 
 /bin/echo "TEST 1: USUARIO LOCAL, altair:testing testing123 LOCALHOST"
-docker exec -it $CONTAINER_NAME radtest altair testing localhost 1812 testing123
+docker exec -it $CONTAINER_NAME radtest altair zion localhost 1812 testing123
 sleep 6s
 
 /bin/echo "TEST 2: USUARIO REMOTO MYSQL, usuario1:usuario1 radius 172.18.0.3"

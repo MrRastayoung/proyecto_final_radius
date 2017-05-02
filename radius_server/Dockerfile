@@ -16,6 +16,7 @@ RUN apt-get update &&\
  freeradius-utils \
  iputils-ping \
  nmap \
+ vim \ 
  net-tools && \
  apt-get clean all; exit 0
 
