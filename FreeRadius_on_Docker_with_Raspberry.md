@@ -496,6 +496,7 @@ apt-get install apache2 php ETC
 
 
 
+RADIUS, RADIUS + MYSQL, RADIUS + LDAP, RADIUS "DALORADIUS"
 
 [RADIUS INSTALL](https://echaleunvistazo.wordpress.com/2012/08/13/servidor-radius-con-debian-freeradius-y-mysql/)
 [RDIUS MYSQL DALORADIUS](http://blog.e2h.net/2011/07/01/servidor-radius-con-gestion-web-freeradius-daloradius/)
@@ -503,9 +504,21 @@ apt-get install apache2 php ETC
 [RADIUS ISSUES](https://sites.google.com/site/techbobbins/home/articles/freeradius-and-crls)
 [8021X](http://tldp.org/HOWTO/html_single/8021X-HOWTO/#what80211i)
 [RADIUS LDAP](http://virtcommunity.blogspot.com.es/2012/10/habilitar-autenticacion-ldap-en.html)
+[NAS RADIUS](https://wiki.freeradius.org/glossary/NAS)
 
+LDAP
+
+KERBEROS
 [KERBEROS INSTALL](https://albertomolina.wordpress.com/2009/06/11/mit-kerberos5-en-gnulinux-debian-lenny/)
 
+HTTP
+[Apache Multiprocesamiento](http://www.vozidea.com/diferencias-entre-apache-prefork-event-worker)
+[LAMP Server](https://www.linode.com/docs/web-servers/lamp/lamp-on-debian-8-jessie)
+
+MYSQL
+
+
+DOCKER
 [DOCKER COMPOSE DOCKERFILE](https://github.com/brunocascio/docker-espanol)
 [DOCKER COMPOSE NETWORK](https://github.com/brunocascio/docker-espanol)
 [DOCKER FILE BEST PRACT](http://crosbymichael.com/dockerfile-best-practices-take-2.html)

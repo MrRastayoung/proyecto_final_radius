@@ -5,9 +5,15 @@
 ### del dockerfile, con el ir construyendolo e ir elaborando una serie
 ### de comprobaciones automaticas para saber que todo funciona correctamente
 
+# Nombre que queremos que tenga el container
+CONTAINER_NAME=http
 
-### Docker build apartir de un dockerfile
-docker build -t proyecto_final/radius .
+# Imagen que utilizaremos ( imagen creada con docker file )
+REPOSITORI_IMAGE="proyecto_final/http"
 
-### Arrancar container con tiempo de vida
-docker run --rm -id -v proyecto_final/radius bash
+### Arrancar container con tiempo de vida limitado
+/bin/echo "CREANDO CONTENEDOR"
+docker run --rm --name $CONTAINER_NAME -p 80:80 -p 443:443 --net network_proyecto_final/radius --ip 172.18.0.4 --link mysql:mysql -id $REPOSITORI_IMAGE 
+sleep 5s
+clear
+

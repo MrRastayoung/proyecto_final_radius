@@ -43,12 +43,13 @@ EOF
 
 
 initialize_mysql_database() {
-  # initialize MySQL data directory
+  # Si no existe el directorio "/var/lib/mysql/mysql" se inicializa la instalación de la base de datos
+  # como usuario que ejecutara el demonio mysqld y la utilizacion de ip's en vez de utilizar los nombres de HOST
   if [ ! -d ${MYSQL_DATA_DIR}/mysql ]; then
     echo "Installing database..."
-    mysql_install_db --user=mysql >/dev/null 2>&1
+    mysql_install_db --user=mysql --skip-name-resolve >/dev/null 2>&1
 
-    # start mysql server
+    # Inicializa el demonio de MySQL
     echo "Starting MySQL server..."
     /usr/bin/mysqld_safe >/dev/null 2>&1 &
 

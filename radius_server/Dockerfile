@@ -41,4 +41,4 @@ ENTRYPOINT ["/startup.sh"]
 ## Puertos que se mapearan host:docker
 EXPOSE 1812/udp 1813
 
-# vim:fileencoding=utf8
+# vim:fileencoding=utf8 ts=4 sw=4 sts=4 sr noet

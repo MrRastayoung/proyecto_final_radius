@@ -8,11 +8,11 @@ REPOSITORI_IMAGE="proyecto_final/ldap"
 
 ### Arrancar container con tiempo de vida limitado
 /bin/echo "CREANDO CONTENEDOR"
-docker run --rm --name $CONTAINER_NAME -id $REPOSITORI_IMAGE /bin/bash
+docker run --rm --name $CONTAINER_NAME -id $REPOSITORI_IMAGE 
 
 ### PID DEL SERVICIO
-docker exec -it $CONTAINER_NAME ps -ax
+#docker exec -it $CONTAINER_NAME ps -ax
 
 ### ELIMINANDO CONTENEDOR
-/bin/echo "Eliminando container"
-docker stop $CONTAINER_NAME
+#/bin/echo "Eliminando container"
+#docker stop $CONTAINER_NAME

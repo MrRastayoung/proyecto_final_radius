@@ -1,5 +1,6 @@
 # Nos basamos en una imagen para procesadores ARM, esta concretamente para raspberry 
-#fi
+# 1: http://txt.fliglio.com/2013/11/creating-a-mysql-docker-container/
+# 2: https://github.com/sameersbn/docker-mysql
 FROM resin/rpi-raspbian
 
 # Persona encargada de esta imagen
