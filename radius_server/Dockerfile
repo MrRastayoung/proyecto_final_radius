@@ -27,6 +27,8 @@ COPY conf_files/users /etc/freeradius/
 COPY conf_files/radiusd.conf /etc/freeradius/
 COPY conf_files/sql.conf /etc/freeradius/sql.conf
 COPY conf_files/default /etc/freeradius/sites-available/
+COPY conf_files/inner-tunnel /etc/freeradius/sites-available
+
 ADD conf_files/startup.sh /startup.sh
 RUN chmod +x /startup.sh
 

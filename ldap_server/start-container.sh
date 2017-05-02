@@ -10,8 +10,14 @@ REPOSITORI_IMAGE="proyecto_final/ldap"
 /bin/echo "CREANDO CONTENEDOR"
 docker run --rm --name $CONTAINER_NAME -id $REPOSITORI_IMAGE 
 
+sleep 4s
+clear
+
 ### PID DEL SERVICIO
-#docker exec -it $CONTAINER_NAME ps -ax
+docker exec -it $CONTAINER_NAME /bin/bash -c "ps -ax"
+sleep 5s
+clear
+
 
 ### ELIMINANDO CONTENEDOR
 #/bin/echo "Eliminando container"
