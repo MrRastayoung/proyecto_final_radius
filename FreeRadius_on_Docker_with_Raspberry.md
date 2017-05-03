@@ -535,6 +535,8 @@ RADIUS, RADIUS + MYSQL, RADIUS + LDAP, RADIUS "DALORADIUS"
 [RADIUS LDAP](http://virtcommunity.blogspot.com.es/2012/10/habilitar-autenticacion-ldap-en.html)
 [NAS RADIUS](https://wiki.freeradius.org/glossary/NAS)
 
+[LDAP OBJECTCLASS RADIUS](http://freeradius.org/radiusd/doc/ldap_howto.txt)
+
 LDAP
 
 KERBEROS

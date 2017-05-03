@@ -31,15 +31,14 @@ COPY conf_files/startup.sh /opt/docker/
 
 #RUN chmod 755 /sbin/entrypoint.sh
 
-RUN chmod 755 /opt/docker/startup.sh; chmod 755 /opt/docker/conf_files/bd_insert.sh && \
-  /bin/bash -c "/opt/docker/startup.sh &" && \
-  sleep 25s && \
+RUN chmod 755 /opt/docker/startup.sh /opt/docker/conf_files/bd_insert.sh && \
+  { /opt/docker/startup.sh & sleep 25; } && \
   /bin/echo "Insertando bases de datos" && \
   ### SCRIPT FREERADIUS
-  /bin/bash -c "opt/docker/conf_files/bd_insert.sh" && \
-  killall mysqld ;exit 0
+  opt/docker/conf_files/bd_insert.sh && \
+  killall mysqld \
+  || true
   ### SCRIPT DALORADIUS
-
 
 EXPOSE 3306/tcp
 VOLUME ["/var/lib/mysql", "/run/mysqld"]
