@@ -14,7 +14,7 @@ sleep 4s
 clear
 
 ### PID DEL SERVICIO
-docker exec -it $CONTAINER_NAME /bin/bash -c "ps -ax"
+docker exec -it $CONTAINER_NAME service slapd status 
 sleep 5s
 clear
 

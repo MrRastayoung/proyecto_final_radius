@@ -1,6 +1,8 @@
 FROM resin/rpi-raspbian
 MAINTAINER " Altair version 0.1
 
+RUN export TERM=dumb
+
 RUN \ 
  apt-get update && \
  apt-get install -y -qq \
@@ -30,7 +32,9 @@ COPY conf_files/php.ini /etc/php5/apache2/
 RUN mkdir /var/log/php 
 RUN chown www-data /var/log/php
 
-RUN chmod +x /opt/docker/install_daloradius.sh && /bin/bash -c "/opt/docker/install_daloradius.sh"
+RUN chmod +x /opt/docker/install_daloradius.sh
+
+RUN /bin/bash -c "/opt/docker/install_daloradius.sh"
 
 EXPOSE 80 443
 

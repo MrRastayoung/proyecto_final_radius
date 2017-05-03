@@ -12,7 +12,6 @@ mysql -e "use radius; source /opt/docker/conf_files/nas.sql;" && \
 mysql -e "use radius; INSERT INTO nas (nasname, shortname, type, secret) VALUES ('172.18.0.3', 'servidor', 'other', 'radius');" && \
 
 
-### populate 
+mysql -e "create database daloradius; grant all on daloradius.* TO radiusfree@'172.18.0.4' identified by 'freeradius'"
 
-## esquemas necesarios radius + mysql
 exit 0;

@@ -20,9 +20,12 @@ clear
 #docker exec -it $CONTAINER_NAME service freeradius start 
 
 ### Comandos de test 
-/bin/echo "TEST 1: USUARIO LOCAL, altair:testing testing123 LOCALHOST"
+/bin/echo "TEST 1: USUARIO LOCAL, altair:zion testing123 LOCALHOST"
 docker exec -it $CONTAINER_NAME radtest altair zion localhost 1812 testing123
-sleep 6s
+sleep 4s
+/bin/echo "El test 1 Falla, descomentar en radiusd.conf en seccion authorize: file"
+
+/bin/echo " "
 
 /bin/echo "TEST 2: USUARIO REMOTO MYSQL, usuario1:usuario1 radius 172.18.0.3"
 docker exec -it $CONTAINER_NAME radtest usuario1 usuario1 172.18.0.3 1812 radius

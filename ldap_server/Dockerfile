@@ -22,3 +22,10 @@ CMD slapd -h 'ldap:/// ldapi:///' -g openldap -u openldap -F /etc/ldap/slapd.d -
 #ENTRYPOINT slapd -h 'ldap:/// ldapi:///' -g openldap -u openldap -F /etc/ldap/slapd.d -d stats && /bin/bash
 
 ENTRYPOINT /bin/bash
+
+
+
+
+
+
+### [LDAP ](https://alex02.wordpress.com/2014/12/12/proyecto-v2-0-parte-2-instalacion-y-configuracion-del-servidor-openldap-en-debian-wheezy/)
