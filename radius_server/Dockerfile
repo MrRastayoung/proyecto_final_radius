@@ -17,29 +17,45 @@ RUN apt-get update &&\
  iputils-ping \
  nmap \
  vim \ 
- net-tools && \
+ net-tools \
+ openssh-server && \
  apt-get clean all; exit 0
 
 RUN mkdir /opt/docker
 
 WORKDIR /opt/docker
 
+COPY conf_files/eap.conf /etc/freeradius/
 COPY conf_files/users /etc/freeradius/
+COPY conf_files/clients.conf /etc/freeradius/
+COPY conf_files/ldap /etc/freeradius/modules/
+COPY conf_files/inner-eap /etc/freeradius/modules/
+
 COPY conf_files/radiusd.conf /etc/freeradius/
 COPY conf_files/sql.conf /etc/freeradius/sql.conf
 COPY conf_files/default /etc/freeradius/sites-available/
 COPY conf_files/inner-tunnel /etc/freeradius/sites-available
 
+COPY conf_files/CERTS_TLS_RADIUS /opt/docker/CERTS_TLS_RADIUS
+
+RUN chmod 644 -R /opt/docker/CERTS_TLS_RADIUS ; chown root:freerad -R /opt/docker/CERTS_TLS_RADIUS
+
+RUN \
+rm -rf /etc/freeradius/certs/ca.pem ;\
+cp /opt/docker/CERTS_TLS_RADIUS/ROOT_CA/ca.pem /etc/freeradius/certs/ ;\
+cp /opt/docker/CERTS_TLS_RADIUS/CERTIFICATES_CSR/server.key /etc/freeradius/certs/ ;\
+cp /opt/docker/CERTS_TLS_RADIUS/CERTIFICADO_FIRMADO/server.crt /etc/freeradius/certs/
+
+RUN \
+cp /opt/docker/CERTS_TLS_RADIUS/CERTS_INNER_EAP/server-inner.pem /etc/freeradius/certs/server-inner.key ;\
+cp /opt/docker/CERTS_TLS_RADIUS/CERTS_INNER_EAP/server-inner.crt /etc/freeradius/certs/
+
 ADD conf_files/startup.sh /startup.sh
+
 RUN chmod +x /startup.sh
 
-#COPY conf_files/sql.conf /etc/freeradius/
-#COPY conf_files/nas.sql /etc/freeradius/sql/
-
-#ENTRYPOINT service freeradius start && /bin/bash 
 
 ENTRYPOINT ["/startup.sh"]
-#CMD ["freeradius -X"]
 
 ## Puertos que se mapearan host:docker
 EXPOSE 1812/udp 1813
