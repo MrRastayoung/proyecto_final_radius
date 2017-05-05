@@ -1,0 +1,82 @@
+dn: dc=zion,dc=com
+dc: zion
+description: Zion.com ORganización Wifi sin lucro
+objectClass: dcObject
+objectClass: organization
+o: zion.com
+
+dn: ou=usuaris,dc=zion,dc=com
+ou: usuaris
+description: Container per usuaris del sistema linux
+objectclass: organizationalunit
+
+dn: ou=grups,dc=zion,dc=com
+ou: grups
+description: Container per a grups del sistema linux
+objectclass: organizationalunit
+
+dn: ou=clients,dc=zion,dc=com
+ou: clients
+description: Container per a clients linux
+objectclass: organizationalunit
+
+dn: ou=maquines,dc=zion,dc=com
+ou: maquines
+description: Container per a maquines linux
+objectclass: organizationalunit
+
+dn: ou=productes,dc=zion,dc=com
+ou: productes
+description: Container per a productes linux
+objectclass: organizationalunit
+
+dn: ou=hosts,dc=zion,dc=com
+ou: hosts
+description: Container per a hosts linux
+objectclass: organizationalunit
+
+dn: ou=keys,dc=zion,dc=com
+ou: keys
+description: Container per a keys linux
+objectclass: organizationalunit
+
+dn: ou=certs,dc=zion,dc=com
+ou: certs
+description: Container per a certs linux
+objectclass: organizationalunit
+
+dn: uid=ldapuser1,dc=zion,dc=com
+uid: ldapuser1
+cn: ldapuser1
+objectClass: account
+objectClass: posixAccount
+objectClass: top
+objectClass: shadowAccount
+objectClass: radiusprofile
+description: 802.1x user
+radiusFilterId: "Enterasys:version=1:policy=Enterprise User"
+userPassword: bGRhcHVzZXIxCg==
+shadowLastChange: 15419
+shadowMin: 0
+shadowMax: 99999
+shadowWarning: 7
+loginShell: /bin/bash
+uidNumber: 10000
+gidNumber: 612
+homeDirectory: /home/ldapuser1
+
+dn: uid=rastayoung,ou=usuaris,dc=zion,dc=com
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+uid: rastayoung
+sn: fernandez
+givenName: Altair
+cn: Altair fernandez
+displayName: Altair Fernandez
+uidNumber: 10001
+gidNumber: 612
+userPassword: jupiter
+gecos: Mrrastayoung
+loginShell: /bin/bash
+homeDirectory: /home/altair

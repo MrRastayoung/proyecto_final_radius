@@ -3,18 +3,8 @@ MAINTAINER " Altair version 0.1
 
 RUN export TERM=dumb
 
-RUN \ 
- apt-get update && \
- apt-get install -y -qq \
- apt-utils \
- vim \
- wget \ 
- mysql-client \
- apache2 \
- php5 \
- php-pear \
- php5-mysql
-
+RUN apt-get update 
+RUN apt-get install -y -qq apt-utils vim wget mysql-client apache2 php5 php-pear php5-mysql
 
 RUN mkdir -p /opt/docker
 
@@ -38,6 +28,5 @@ RUN /bin/bash -c "/opt/docker/install_daloradius.sh"
 
 EXPOSE 80 443
 
+#CMD ["/usr/sbin/apachectl","-S"]
 ENTRYPOINT service apache2 start && /bin/bash
-
-CMD ["apachectl -S"]

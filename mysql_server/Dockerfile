@@ -14,7 +14,7 @@ MAINTAINER Altair Fernandez Castro Version 0.1
 ENV MYSQL_DATA_DIR=/var/lib/mysql \ 
   MYSQL_RUN_DIR=/run/mysqld
 
-RUN apt-get update \
+RUN apt-get update -y \
  && DEBIAN_FRONTEND=noninteractive apt-get install -y -qq mysql-server \
  && rm -rf ${MYSQL_DATA_DIR} \
  && rm -rf /var/lib/apt/lists/*
@@ -34,11 +34,9 @@ COPY conf_files/startup.sh /opt/docker/
 RUN chmod 755 /opt/docker/startup.sh /opt/docker/conf_files/bd_insert.sh && \
   { /opt/docker/startup.sh & sleep 25; } && \
   /bin/echo "Insertando bases de datos" && \
-  ### SCRIPT FREERADIUS
   opt/docker/conf_files/bd_insert.sh && \
   killall mysqld \
   || true
-  ### SCRIPT DALORADIUS
 
 EXPOSE 3306/tcp
 VOLUME ["/var/lib/mysql", "/run/mysqld"]

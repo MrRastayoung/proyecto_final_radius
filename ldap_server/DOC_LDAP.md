@@ -98,3 +98,10 @@ mail: larry.caiyu@gmail.com
 description: hacker guy
 ou: Development Department
 	``
+
+
+
+
+
+
+[LDAP TLS](http://mageconfig.blogspot.com.es/2014/11/enable-ssl-in-openldap.html)
