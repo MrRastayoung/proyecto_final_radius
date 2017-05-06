@@ -14,6 +14,7 @@ RUN apt-get update &&\
  freeradius\
  freeradius-mysql\
  freeradius-utils \
+ freeradius-ldap \
  iputils-ping \
  nmap \
  vim \ 

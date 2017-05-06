@@ -85,3 +85,7 @@ NOTA: __ Instalar los paquetes necesarios__ **freeradius-ldap**.
 
 ### 4. Comprobamos mediante radtest que todo funciona correctamente:
 	radtest usuarioldap usuarioldap 172.18.0.3 1812 radius
+
+
+
+[LDAP RADIUS](https://tecadmin.net/freeradius-authentication-with-openldap/#)

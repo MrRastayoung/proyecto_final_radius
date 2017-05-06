@@ -4,6 +4,8 @@
 CONTAINER_NAME=mysql
 ## Imagen que utilizaremos ( imagen creada con docker file )
 REPOSITORI_IMAGE="proyecto_final/mysql"
+CONTAINER_HOSTNAME="mysql"
+
 
 mkdir -p /opt/mysql/data
 #chcon -Rt svirt_sandbox_file_t /opt/mysql/data
@@ -12,7 +14,7 @@ mkdir -p /opt/mysql/data
 
 /bin/echo "Arrancando container en BACKGROUND"
 #docker run --rm --name $CONTAINER_NAME -id $REPOSITORI_IMAGE -v /opt/mysql/data:/var/lib/mysql 
-docker run --rm --name $CONTAINER_NAME -p 3306:3306 --net network_proyecto_final/radius --ip 172.18.0.2 -id $REPOSITORI_IMAGE -v /opt/mysql/data:/var/lib/mysql ||  docker stop $CONTAINER_NAME &&
+docker run --rm --name $CONTAINER_NAME --hostname $CONTAINER_HOSTNAME -p 3306:3306 --net network_proyecto_final/radius --ip 192.168.0.2 -id $REPOSITORI_IMAGE -v /opt/mysql/data:/var/lib/mysql ||  docker stop $CONTAINER_NAME &&
 sleep 5s
 clear
 #################################################

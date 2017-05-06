@@ -73,7 +73,7 @@
 # entry so that no DEFAULT entry will be used, and the user will NOT
 # get any attributes in addition to the ones listed here.
 #
-altair	Cleartext-Password := "testing"
+altair	Cleartext-Password := "zion"
 #	Service-Type = Framed-User,
 #	Framed-Protocol = PPP,
 #	Framed-IP-Address = 172.16.3.33,
@@ -201,3 +201,8 @@ DEFAULT	Hint == "SLIP"
 # 	Service-Type = Administrative-User
 
 # On no match, the user is denied access.
+
+
+DEFAULT LDAP-Group != "radius_users", Auth-Type := Reject
+DEFAULT Auth-Type := LDAP
+      Fall-Through = 1

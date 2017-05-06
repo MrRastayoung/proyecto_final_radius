@@ -11,9 +11,11 @@ CONTAINER_NAME=http
 # Imagen que utilizaremos ( imagen creada con docker file )
 REPOSITORI_IMAGE="proyecto_final/http"
 
+CONTAINER_HOSTNAME=http
+
 ### Arrancar container con tiempo de vida limitado
 /bin/echo "CREANDO CONTENEDOR"
-docker run --rm --name $CONTAINER_NAME -p 80:80 -p 443:443 --net network_proyecto_final/radius --ip 172.18.0.4 --link mysql:mysql -id $REPOSITORI_IMAGE 
+docker run --rm --name $CONTAINER_NAME --hostname $CONTAINER_HOSTNAME -p 80:80 -p 443:443 --net network_proyecto_final/radius --ip 192.168.0.4 --link mysql:mysql -id $REPOSITORI_IMAGE 
 sleep 5s
 clear
 

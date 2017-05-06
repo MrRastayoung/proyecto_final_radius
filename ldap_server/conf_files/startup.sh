@@ -10,7 +10,7 @@
 
 /bin/echo "Matando servicio"
 # Detener el servicio slapd
-pkill slapd
+pkill -9 slapd
 
 /bin/echo "Configurando LDAP por primera vez"
 # Eliminar cualquier rastro de configuración residual de la instalación.
@@ -33,6 +33,14 @@ slaptest -F /etc/openldap/slapd.d
 # Otorgamos los permisos al usuario y grupo ldap a los directorios para que pueda trabajar sobre ellos.
 /usr/bin/chown -R ldap.ldap /var/lib/ldap*
 /usr/bin/chown -R ldap.ldap /etc/openldap/slapd.d/*
+/usr/bin/cp /opt/docker/LDAP/cacert.pem /etc/ssl/certs/cacert.pem
+/usr/bin/cp /opt/docker/LDAP/slapd01.pem /etc/ssl/certs/slapd01.pem
+/usr/bin/cp /opt/docker/LDAP/slapd01_key.pem /etc/ssl/private/slapd01_key.pem
+
+/usr/bin/chown ldap:ldap /etc/ssl/private/cakey.pem \
+/etc/ssl/private/slapd01_key.pem  /etc/ssl/certs/cacert.pem   /etc/ssl/certs/slapd01.pem
+/usr/bin/chown -R ldap:ldap /etc/ssl/private 
+
 
 /bin/echo "INICIANDO EL SERVCICIO PARA CARGAR ORGANIZACIÓN "
 # Iniciamos el servicio el servicio

@@ -5,7 +5,7 @@ MAINTAINER "Altair version 0.1 LDAP"
 ### CONF FILES
 
 RUN mkdir /opt/docker
-#COPY conf_files /opt/docker
+COPY conf_files/LDAP /opt/docker
 
 
 RUN rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-24-armhfp
