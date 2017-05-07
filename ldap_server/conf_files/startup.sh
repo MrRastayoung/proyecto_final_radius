@@ -1,58 +1,19 @@
 #! /bin/bash
-
 # LDAP
-
 ## Script para automatizar el inicio del servicio ldap, cargando la organización y los usuarios LDAP.
-
 ########
 # regenerar la BD de slapd.d
 ########
 
-/bin/echo "Matando servicio"
-# Detener el servicio slapd
-pkill -9 slapd
+/bin/echo "Regenerando estructura LDAP"
+sh /opt/docker/regeBD.sh
 
-/bin/echo "Configurando LDAP por primera vez"
-# Eliminar cualquier rastro de configuración residual de la instalación.
-/usr/bin/rm -rf /var/lib/ldap/*
-
-# Restaurar DB_CONFIG configuración interna qe tendra el tipo de base de datos que utilicemos **BDB/HDB**.
-/usr/bin/cp -R /usr/share/openldap-servers/DB_CONFIG.example    /var/lib/ldap/DB_CONFIG
-
-# Eliminar por completo la configuración que tenga nuestro servidor, hasta el momento es configuración 
-# de instalación, nosotros la personalizaremos a nuestro gusto
-/usr/bin/rm -rf /etc/openldap/slapd.d/*
-
-/bin/echo "COMPROBANDO NUESTRO FICHERO"
-# Comprobación de nuestro fichero de configuración slapd-cn=config-edt.org.conf
-slaptest -f /opt/docker/slapd-cn=config-zion.com.conf
-slaptest -f /opt/docker/slapd-cn=config-zion.com.conf -F /etc/openldap/slapd.d
-slaptest -F /etc/openldap/slapd.d
-
-/bin/echo "Otorgando permisos"
-# Otorgamos los permisos al usuario y grupo ldap a los directorios para que pueda trabajar sobre ellos.
-/usr/bin/chown -R ldap.ldap /var/lib/ldap*
-/usr/bin/chown -R ldap.ldap /etc/openldap/slapd.d/*
-/usr/bin/cp /opt/docker/LDAP/cacert.pem /etc/ssl/certs/cacert.pem
-/usr/bin/cp /opt/docker/LDAP/slapd01.pem /etc/ssl/certs/slapd01.pem
-/usr/bin/cp /opt/docker/LDAP/slapd01_key.pem /etc/ssl/private/slapd01_key.pem
-
-/usr/bin/chown ldap:ldap /etc/ssl/private/cakey.pem \
-/etc/ssl/private/slapd01_key.pem  /etc/ssl/certs/cacert.pem   /etc/ssl/certs/slapd01.pem
-/usr/bin/chown -R ldap:ldap /etc/ssl/private 
+#/bin/echo " SSL "
+## SSL
+#cp /opt/docker/LDAP/server.key /etc/openldap/certs/
+#cp /opt/docker/LDAP/server.crt /etc/openldap/certs/
+#cp /etc/pki/tls/certs/ca-bundle.crt /etc/openldap/certs/ 
+#chown ldap. /etc/openldap/certs/server.key /etc/openldap/certs/server.crt /etc/openldap/certs/ca-bundle.crt
 
 
-/bin/echo "INICIANDO EL SERVCICIO PARA CARGAR ORGANIZACIÓN "
-# Iniciamos el servicio el servicio
-/usr/sbin/slapd -u ldap -h "ldap:/// ldaps:/// ldapi:///" -u ldap
 
-#slapcat -n0 |less
-echo "REGENERACION CORRECTA"
-
-#aplicar .ldif
-ldapadd -x -h localhost:389 -D 'cn=Manager,dc=zion,dc=com' -w secret -f /opt/docker/zion.com.ldif 
-
-# Busqueda de los domain name que compongan nuestra organización de LDAP
-#ldapsearch -xLLL -h localhost:389 -b 'dc=zion,dc=com' dn
-
-pkill -9 slapd

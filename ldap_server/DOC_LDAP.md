@@ -100,8 +100,29 @@ ou: Development Department
 	``
 
 
+LDAP TLS
 
-
+1 Crear certificados SSL
+	1 crear serverkey
+		openssl genrsa -aes128 -out server.key 2048
+	2 quitar passprhase
+		openssl rsa -in server.key -out server.key 
+	3 Peticición de certificación
+		openssl req -new -days 3650 -key server.key -out server.csr
+		``
+Country Name (2 letter code) [AU]:ES# country
+State or Province Name (full name) [Some-State]:Barcelona   # state
+Locality Name (eg, city) []:Mataro# city
+Organization Name (eg, company) [Internet Widgits Pty Ltd]:Zion   # company
+Organizational Unit Name (eg, section) []:Zion Net   # department
+Common Name (e.g. server FQDN or YOUR name) []:ldap.zion.com   # server's FQDN
+Email Address []:webmaster@zion.com# email address
+	.
+	.
+	.
+		``
+	4 Firmando la petición del servidor
+		openssl x509 -in server.csr -out server.crt -req -signkey server.key -days 3650
 
 
 [LDAP TLS](http://mageconfig.blogspot.com.es/2014/11/enable-ssl-in-openldap.html)

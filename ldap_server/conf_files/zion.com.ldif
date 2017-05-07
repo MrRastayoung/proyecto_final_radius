@@ -1,29 +1,24 @@
 dn: dc=zion,dc=com
 dc: zion
-description: Zion.com ORganización Wifi sin lucro
+description: Escola del treball de Barcelona
 objectClass: dcObject
 objectClass: organization
 o: zion.com
 
-dn: ou=People,dc=zion,dc=com
+dn: ou=people,dc=zion,dc=com
 objectClass: organizationalUnit
-ou: People
+ou: people
 
-dn: ou=Groups,dc=zion,dc=com
+dn: ou=groups,dc=zion,dc=com
 objectClass: organizationalUnit
-ou: Groups
+ou: groups
 
-dn: cn=dev,ou=Groups,dc=zion,dc=com  
-objectClass: posixGroup  
-cn: dev  
-gidNumber: 5000
-
-dn: cn=dev,ou=Groups,dc=zion,dc=com
+dn: cn=dev,ou=groups,dc=zion,dc=com
 objectClass: posixGroup
 cn: dev
 gidNumber: 5000
 
-dn: uid=altair,ou=People,dc=zion,dc=com
+dn: cn=altair,ou=people,dc=zion,dc=com
 objectClass: inetOrgPerson
 objectClass: posixAccount
 objectClass: shadowAccount
@@ -34,19 +29,19 @@ cn: Altair Fernandez
 displayName: Altair Fernandez
 uidNumber: 10000
 gidNumber: 5000
-userPassword: saman
+userPassword: zion
 gecos: Altair Fernandez
 loginShell: /bin/bash
 homeDirectory: /home/altair
 
-##### SSL CERTIFICATES
-dn: cn=config
-add: olcTLSCACertificateFile
-olcTLSCACertificateFile: /etc/ssl/certs/cacert.pem
--
-add: olcTLSCertificateFile
-olcTLSCertificateFile: /etc/ssl/certs/slapd01.pem
--
-add: olcTLSCertificateKeyFile
-olcTLSCertificateKeyFile: /etc/ssl/private/slapd01_key.pem
+dn: ou=hosts,dc=zion,dc=com
+objectClass: organizationalUnit
+ou: Hosts
 
+dn: cn=ldap,ou=hosts,dc=zion,dc=com
+objectClass: top
+objectClass: ipHost
+objectClass: device
+ipHostNumber: 192.168.0.5
+cn: ldap
+cn: ldap.zion.com

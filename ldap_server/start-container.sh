@@ -2,7 +2,7 @@
 
 # Nombre que queremos que tenga el container
 CONTAINER_NAME="ldap"
-CONTAINER_HOSTNAME="ldap"
+CONTAINER_HOSTNAME="ldap.zion.com"
 # Imagen que utilizaremos ( imagen creada con docker file )
 REPOSITORI_IMAGE="proyecto_final/ldap"
 
