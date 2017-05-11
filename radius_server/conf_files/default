@@ -423,7 +423,7 @@ accounting {
 	#  Instead of sending the query to the SQL server,
 	#  write it into a log file.
 	#
-#	sql_log
+	sql_log
 
 	#  Cisco VoIP specific bulk accounting
 #	pgsql-voip
@@ -447,11 +447,11 @@ accounting {
 #  or rlm_sql module can handle this.
 #  The rlm_sql module is *much* faster
 session {
-	radutmp
+#	radutmp
 
 	#
 	#  See "Simultaneous Use Checking Queries" in sql.conf
-#	sql
+	sql
 }
 
 
@@ -472,13 +472,13 @@ post-auth {
 	#  After authenticating the user, do another SQL query.
 	#
 	#  See "Authentication Logging Queries" in sql.conf
-#	sql
+	sql
 
 	#
 	#  Instead of sending the query to the SQL server,
 	#  write it into a log file.
 	#
-#	sql_log
+	sql_log
 
 	#
 	#  Un-comment the following if you have set
@@ -574,8 +574,9 @@ post-auth {
 	#
 	Post-Auth-Type REJECT {
 		# log failed authentications in SQL, too.
-#		sql
+		sql
 		attr_filter.access_reject
+		ldap
 	}
 }
 

@@ -30,11 +30,14 @@ ldap {
 	#
 	#  Note that this needs to match the name in the LDAP
 	#  server certificate, if you're using ldaps.
-	server = "172.18.0.5"
+	server = "192.168.0.5"
 	identity = "cn=Manager,dc=zion,dc=com"
 	password = secret
 	basedn = "dc=zion,dc=com"
+	
+	#### DEFAULT FILTER
 	filter = "(uid=%{%{Stripped-User-Name}:-%{User-Name}})"
+#	filter = "(posixAccount)(uid=%u))"
 	base_filter = "(objectclass=radiusprofile)"
 
 	#  How many connections to keep open to the LDAP server.

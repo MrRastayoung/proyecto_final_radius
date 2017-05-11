@@ -17,18 +17,19 @@ source /opt/docker/conf_files/nas.sql;" && \
 ### DALORADIUS
 ### Creacion de la base de datosm usuario administrador y insercion del esquema principal de daloradius.
 
-mysql -e "create database daloradius; \
-grant all on daloradius.* TO radiusfree@'192.168.0.4' identified by 'freeradius'; \
-use daloradius; \
-source /opt/docker/conf_files/fr2-mysql-daloradius-and-freeradius.sql;" && \
+#mysql -e "create database daloradius; \
+#grant all on daloradius.* TO radiusfree@'192.168.0.4' identified by 'freeradius'; \
+#use daloradius; \
+#source /opt/docker/conf_files/fr2-mysql-daloradius-and-freeradius.sql;" && \
 
 ### POPULATE
 mysql -e "use radius; \
-INSERT INTO radcheck (username,attribute,op,value) VALUES('usuario1','password','==','usuario1');"&& \
-mysql -e "use radius; \
-INSERT INTO nas (nasname, shortname, type, secret) VALUES ('192.168.0.3', 'servidor', 'other', 'radius');" && \
-
-mysql -e "use radius; \
-INSERT INTO nas (nasname, shortname, type, secret) VALUES ('192.168.1.3', 'ap_wifi', 'other', 'radius');" && \
-
-exit 0;
+INSERT INTO radcheck (username,attribute,op,value) VALUES('usuario1','password','==','usuario1'); \
+INSERT INTO radcheck (username,attribute,op,value) VALUES('usuario2','password','==','usuario1'); \
+INSERT INTO radcheck (username,attribute,op,value) VALUES('altair','password','==','zion'); \
+INSERT INTO nas (nasname, shortname, type, secret) VALUES ('192.168.0.3', 'servidor', 'other', 'radius');" 
+exit 0
+#
+#
+#
+#INSERT INTO nas (nasname, shortname, type, secret) VALUES ('192.168.2.254', 'dlink', 'other', 'ap_wifi');"

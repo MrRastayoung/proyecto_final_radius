@@ -18,6 +18,11 @@ objectClass: posixGroup
 cn: dev
 gidNumber: 5000
 
+dn: cn=radius,ou=groups,dc=zion,dc=com
+objectClass: posixGroup
+cn: radius
+gidNumber: 6000
+
 dn: cn=altair,ou=people,dc=zion,dc=com
 objectClass: inetOrgPerson
 objectClass: posixAccount
@@ -29,10 +34,26 @@ cn: Altair Fernandez
 displayName: Altair Fernandez
 uidNumber: 10000
 gidNumber: 5000
-userPassword: zion
+userPassword: zionLDAP
 gecos: Altair Fernandez
 loginShell: /bin/bash
 homeDirectory: /home/altair
+
+dn: cn=radiususer1,ou=people,dc=zion,dc=com
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+uid: radiususer1
+sn: ruser1
+givenName: ruser1
+cn: radius user1
+displayName: Radius User1
+uidNumber: 2001
+gidNumber: 6000
+userPassword: user1LDAP
+gecos: user 1 LDAP
+loginShell: /bin/bash
+homeDirectory: /home/radius/ruser1
 
 dn: ou=hosts,dc=zion,dc=com
 objectClass: organizationalUnit

@@ -203,6 +203,7 @@ DEFAULT	Hint == "SLIP"
 # On no match, the user is denied access.
 
 
-DEFAULT LDAP-Group != "radius_users", Auth-Type := Reject
+#DEFAULT LDAP-Group != "radius_users", Auth-Type := Reject
+
 DEFAULT Auth-Type := LDAP
       Fall-Through = 1

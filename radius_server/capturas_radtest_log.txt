@@ -1,0 +1,1049 @@
+#######
+CAPTURAS RADTEST: FILES, SQL, LDAP, UNIX,     ( PAM )
+######
+
+###
+CAPTURA  FILES	----> autenticación mediante fichero en texto plano en /etc/freeradius/users
+###
+
+Sun May  7 13:51:20 2017 : Info: Ready to process requests.
+rad_recv: Access-Request packet from host 127.0.0.1 port 41783, id=58, length=76
+	User-Name = "altair"
+	User-Password = "zion"
+	NAS-IP-Address = 192.168.0.3
+	NAS-Port = 1812
+	Message-Authenticator = 0x9dcf93f6f12314d58e64f996028375ee
+Sun May  7 13:51:37 2017 : Info: # Executing section authorize from file /etc/freeradius/sites-enabled/default
+Sun May  7 13:51:37 2017 : Info: +group authorize {
+Sun May  7 13:51:37 2017 : Info: ++[preprocess] = ok
+Sun May  7 13:51:37 2017 : Info: ++[chap] = noop
+Sun May  7 13:51:37 2017 : Info: ++[mschap] = noop
+Sun May  7 13:51:37 2017 : Info: ++[digest] = noop
+Sun May  7 13:51:37 2017 : Info: [suffix] No '@' in User-Name = "altair", looking up realm NULL
+Sun May  7 13:51:37 2017 : Info: [suffix] No such realm "NULL"
+Sun May  7 13:51:37 2017 : Info: ++[suffix] = noop
+Sun May  7 13:51:37 2017 : Info: [eap] No EAP-Message, not doing EAP
+Sun May  7 13:51:37 2017 : Info: ++[eap] = noop
+Sun May  7 13:51:37 2017 : Info: [files] users: Matched entry altair at line 76
+Sun May  7 13:51:37 2017 : Info: ++[files] = ok
+Sun May  7 13:51:37 2017 : Info: ++[expiration] = noop
+Sun May  7 13:51:37 2017 : Info: ++[logintime] = noop
+Sun May  7 13:51:37 2017 : Info: ++[pap] = updated
+Sun May  7 13:51:37 2017 : Info: +} # group authorize = updated
+Sun May  7 13:51:37 2017 : Info: Found Auth-Type = PAP
+Sun May  7 13:51:37 2017 : Info: # Executing group from file /etc/freeradius/sites-enabled/default
+Sun May  7 13:51:37 2017 : Info: +group PAP {
+Sun May  7 13:51:37 2017 : Info: [pap] login attempt with password "zion"
+Sun May  7 13:51:37 2017 : Info: [pap] Using clear text password "zion"
+Sun May  7 13:51:37 2017 : Info: [pap] User authenticated successfully
+Sun May  7 13:51:37 2017 : Info: ++[pap] = ok
+Sun May  7 13:51:37 2017 : Info: +} # group PAP = ok
+Sun May  7 13:51:37 2017 : Info: # Executing section post-auth from file /etc/freeradius/sites-enabled/default
+Sun May  7 13:51:37 2017 : Info: +group post-auth {
+Sun May  7 13:51:37 2017 : Info: ++[exec] = noop
+Sun May  7 13:51:37 2017 : Info: +} # group post-auth = noop
+Sending Access-Accept of id 58 to 127.0.0.1 port 41783
+Sun May  7 13:51:37 2017 : Info: Finished request 0.
+Sun May  7 13:51:37 2017 : Debug: Going to the next request
+Sun May  7 13:51:37 2017 : Debug: Waking up in 4.9 seconds.
+Sun May  7 13:51:42 2017 : Info: Cleaning up request 0 ID 58 with timestamp +17
+Sun May  7 13:51:42 2017 : Info: Ready to process requests.
+
+#################################################################################################
+
+###
+CAPTURA  SQL  ----> autenticación mediante fichero en texto plano en /etc/freeradius/users
+###
+rad_recv: Access-Request packet from host 127.0.0.1 port 58552, id=131, length=78
+	User-Name = "usuario1"
+	User-Password = "usuario1"
+	NAS-IP-Address = 192.168.0.3
+	NAS-Port = 1812
+	Message-Authenticator = 0xcfbaf9e41fcf6e6f15fe2e44f960f5a4
+Tue May  9 03:53:10 2017 : Info: # Executing section authorize from file /etc/freeradius/sites-enabled/default
+Tue May  9 03:53:10 2017 : Info: +group authorize {
+Tue May  9 03:53:10 2017 : Info: ++[preprocess] = ok
+Tue May  9 03:53:10 2017 : Info: ++[chap] = noop
+Tue May  9 03:53:10 2017 : Info: ++[mschap] = noop
+Tue May  9 03:53:10 2017 : Info: ++[digest] = noop
+Tue May  9 03:53:10 2017 : Info: [suffix] No '@' in User-Name = "usuario1", looking up realm NULL
+Tue May  9 03:53:10 2017 : Info: [suffix] No such realm "NULL"
+Tue May  9 03:53:10 2017 : Info: ++[suffix] = noop
+Tue May  9 03:53:10 2017 : Info: [eap] No EAP-Message, not doing EAP
+Tue May  9 03:53:10 2017 : Info: ++[eap] = noop
+Tue May  9 03:53:10 2017 : Info: ++[files] = noop
+Tue May  9 03:53:10 2017 : Info: [sql] 	expand: %{User-Name} -> usuario1
+Tue May  9 03:53:10 2017 : Info: [sql] sql_set_user escaped user --> 'usuario1'
+Tue May  9 03:53:10 2017 : Debug: rlm_sql (sql): Reserving sql socket id: 29
+Tue May  9 03:53:10 2017 : Info: [sql] 	expand: SELECT id, username, attribute, value, op           FROM radcheck           WHERE username = '%{SQL-User-Name}'           ORDER BY id -> SELECT id, username, attribute, value, op           FROM radcheck           WHERE username = 'usuario1'           ORDER BY id
+Tue May  9 03:53:10 2017 : Debug: WARNING: Found User-Password == "...".
+Tue May  9 03:53:10 2017 : Debug: WARNING: Are you sure you don't mean Cleartext-Password?
+Tue May  9 03:53:10 2017 : Debug: WARNING: See "man rlm_pap" for more information.
+Tue May  9 03:53:10 2017 : Info: [sql] User found in radcheck table
+Tue May  9 03:53:10 2017 : Info: [sql] 	expand: SELECT id, username, attribute, value, op           FROM radreply           WHERE username = '%{SQL-User-Name}'           ORDER BY id -> SELECT id, username, attribute, value, op           FROM radreply           WHERE username = 'usuario1'           ORDER BY id
+Tue May  9 03:53:10 2017 : Info: [sql] 	expand: SELECT groupname           FROM radusergroup           WHERE username = '%{SQL-User-Name}'           ORDER BY priority -> SELECT groupname           FROM radusergroup           WHERE username = 'usuario1'           ORDER BY priority
+Tue May  9 03:53:10 2017 : Debug: rlm_sql (sql): Released sql socket id: 29
+Tue May  9 03:53:10 2017 : Info: ++[sql] = ok
+Tue May  9 03:53:10 2017 : Info: ++[expiration] = noop
+Tue May  9 03:53:10 2017 : Info: ++[logintime] = noop
+Tue May  9 03:53:10 2017 : Info: ++[pap] = updated
+Tue May  9 03:53:10 2017 : Info: +} # group authorize = updated
+Tue May  9 03:53:10 2017 : Info: Found Auth-Type = PAP
+Tue May  9 03:53:10 2017 : Info: !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Tue May  9 03:53:10 2017 : Info: !!!    Replacing User-Password in config items with Cleartext-Password.     !!!
+Tue May  9 03:53:10 2017 : Info: !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Tue May  9 03:53:10 2017 : Info: !!! Please update your configuration so that the "known good"               !!!
+Tue May  9 03:53:10 2017 : Info: !!! clear text password is in Cleartext-Password, and not in User-Password. !!!
+Tue May  9 03:53:10 2017 : Info: !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Tue May  9 03:53:10 2017 : Info: # Executing group from file /etc/freeradius/sites-enabled/default
+Tue May  9 03:53:10 2017 : Info: +group PAP {
+Tue May  9 03:53:10 2017 : Info: [pap] login attempt with password "usuario1"
+Tue May  9 03:53:10 2017 : Info: [pap] Using clear text password "usuario1"
+Tue May  9 03:53:10 2017 : Info: [pap] User authenticated successfully
+Tue May  9 03:53:10 2017 : Info: ++[pap] = ok
+Tue May  9 03:53:10 2017 : Info: +} # group PAP = ok
+Tue May  9 03:53:10 2017 : Info: # Executing section post-auth from file /etc/freeradius/sites-enabled/default
+Tue May  9 03:53:10 2017 : Info: +group post-auth {
+Tue May  9 03:53:10 2017 : Info: ++[exec] = noop
+Tue May  9 03:53:10 2017 : Info: +} # group post-auth = noop
+Sending Access-Accept of id 131 to 127.0.0.1 port 58552
+Tue May  9 03:53:10 2017 : Info: Finished request 1.
+Tue May  9 03:53:10 2017 : Debug: Going to the next request
+Tue May  9 03:53:10 2017 : Debug: Waking up in 4.9 seconds.
+Tue May  9 03:53:15 2017 : Info: Cleaning up request 1 ID 131 with timestamp +105
+Tue May  9 03:53:15 2017 : Info: Ready to process requests.
+
+
+
+
+
+
+###### CAPTURA LDAP
+
+rad_recv: Access-Request packet from host 127.0.0.1 port 50039, id=210, length=76
+	User-Name = "altair"
+	User-Password = "zionLDAP"
+	NAS-IP-Address = 192.168.0.3
+	NAS-Port = 2
+	Message-Authenticator = 0xa13d6f726bbb2d3382045864b5e46d1a
+Tue May  9 04:11:04 2017 : Info: # Executing section authorize from file /etc/freeradius/sites-enabled/default
+Tue May  9 04:11:04 2017 : Info: +group authorize {
+Tue May  9 04:11:04 2017 : Info: ++[preprocess] = ok
+Tue May  9 04:11:04 2017 : Info: ++[chap] = noop
+Tue May  9 04:11:04 2017 : Info: ++[mschap] = noop
+Tue May  9 04:11:04 2017 : Info: ++[digest] = noop
+Tue May  9 04:11:04 2017 : Info: [suffix] No '@' in User-Name = "altair", looking up realm NULL
+Tue May  9 04:11:04 2017 : Info: [suffix] No such realm "NULL"
+Tue May  9 04:11:04 2017 : Info: ++[suffix] = noop
+Tue May  9 04:11:04 2017 : Info: [eap] No EAP-Message, not doing EAP
+Tue May  9 04:11:04 2017 : Info: ++[eap] = noop
+Tue May  9 04:11:04 2017 : Info: [files] users: Matched entry altair at line 76
+Tue May  9 04:11:04 2017 : Info: ++[files] = ok
+Tue May  9 04:11:04 2017 : Info: [sql] 	expand: %{User-Name} -> altair
+Tue May  9 04:11:04 2017 : Info: [sql] sql_set_user escaped user --> 'altair'
+Tue May  9 04:11:04 2017 : Debug: rlm_sql (sql): Reserving sql socket id: 28
+Tue May  9 04:11:04 2017 : Info: [sql] 	expand: SELECT id, username, attribute, value, op           FROM radcheck           WHERE username = '%{SQL-User-Name}'           ORDER BY id -> SELECT id, username, attribute, value, op           FROM radcheck           WHERE username = 'altair'           ORDER BY id
+Tue May  9 04:11:04 2017 : Debug: WARNING: Found User-Password == "...".
+Tue May  9 04:11:04 2017 : Debug: WARNING: Are you sure you don't mean Cleartext-Password?
+Tue May  9 04:11:04 2017 : Debug: WARNING: See "man rlm_pap" for more information.
+Tue May  9 04:11:04 2017 : Info: [sql] 	expand: SELECT groupname           FROM radusergroup           WHERE username = '%{SQL-User-Name}'           ORDER BY priority -> SELECT groupname           FROM radusergroup           WHERE username = 'altair'           ORDER BY priority
+Tue May  9 04:11:04 2017 : Debug: rlm_sql (sql): Released sql socket id: 28
+Tue May  9 04:11:04 2017 : Info: [sql] User altair not found
+Tue May  9 04:11:04 2017 : Info: ++[sql] = notfound
+Tue May  9 04:11:04 2017 : Info: [ldap] performing user authorization for altair
+Tue May  9 04:11:04 2017 : Info: [ldap] 	expand: %{Stripped-User-Name} -> 
+Tue May  9 04:11:04 2017 : Info: [ldap] 	... expanding second conditional
+Tue May  9 04:11:04 2017 : Info: [ldap] 	expand: %{User-Name} -> altair
+Tue May  9 04:11:04 2017 : Info: [ldap] 	expand: (uid=%{%{Stripped-User-Name}:-%{User-Name}}) -> (uid=altair)
+Tue May  9 04:11:04 2017 : Info: [ldap] 	expand: dc=zion,dc=com -> dc=zion,dc=com
+Tue May  9 04:11:04 2017 : Debug:   [ldap] ldap_get_conn: Checking Id: 0
+Tue May  9 04:11:04 2017 : Debug:   [ldap] ldap_get_conn: Got Id: 0
+Tue May  9 04:11:04 2017 : Debug:   [ldap] performing search in dc=zion,dc=com, with filter (uid=altair)
+Tue May  9 04:11:04 2017 : Info: [ldap] No default NMAS login sequence
+Tue May  9 04:11:04 2017 : Info: [ldap] looking for check items in directory...
+Tue May  9 04:11:04 2017 : Debug:   [ldap] userPassword -> Password-With-Header == "zionLDAP"
+Tue May  9 04:11:04 2017 : Info: [ldap] looking for reply items in directory...
+Tue May  9 04:11:04 2017 : Info: [ldap] Setting Auth-Type = LDAP
+Tue May  9 04:11:04 2017 : Debug:   [ldap] ldap_release_conn: Release Id: 0
+Tue May  9 04:11:04 2017 : Info: ++[ldap] = ok
+Tue May  9 04:11:04 2017 : Info: ++[expiration] = noop
+Tue May  9 04:11:04 2017 : Info: ++[logintime] = noop
+Tue May  9 04:11:04 2017 : Info: [pap] Config already contains "known good" password.  Ignoring Password-With-Header
+Tue May  9 04:11:04 2017 : Info: [pap] WARNING: Auth-Type already set.  Not setting to PAP
+Tue May  9 04:11:04 2017 : Info: ++[pap] = noop
+Tue May  9 04:11:04 2017 : Info: +} # group authorize = ok
+Tue May  9 04:11:04 2017 : Info: Found Auth-Type = LDAP
+Tue May  9 04:11:04 2017 : Info: # Executing group from file /etc/freeradius/sites-enabled/default
+Tue May  9 04:11:04 2017 : Info: +group LDAP {
+Tue May  9 04:11:04 2017 : Info: [ldap] login attempt by "altair" with password "zionLDAP"
+Tue May  9 04:11:04 2017 : Info: [ldap] user DN: cn=altair,ou=people,dc=zion,dc=com
+Tue May  9 04:11:04 2017 : Debug:   [ldap] (re)connect to 192.168.0.5:389, authentication 1
+Tue May  9 04:11:04 2017 : Debug:   [ldap] bind as cn=altair,ou=people,dc=zion,dc=com/zionLDAP to 192.168.0.5:389
+Tue May  9 04:11:04 2017 : Debug:   [ldap] waiting for bind result ...
+Tue May  9 04:11:04 2017 : Debug:   [ldap] Bind was successful
+Tue May  9 04:11:04 2017 : Info: [ldap] user altair authenticated succesfully
+Tue May  9 04:11:04 2017 : Info: ++[ldap] = ok
+Tue May  9 04:11:04 2017 : Info: +} # group LDAP = ok
+Tue May  9 04:11:04 2017 : Info: # Executing section post-auth from file /etc/freeradius/sites-enabled/default
+Tue May  9 04:11:04 2017 : Info: +group post-auth {
+Tue May  9 04:11:04 2017 : Info: [sql] 	expand: %{User-Name} -> altair
+Tue May  9 04:11:04 2017 : Info: [sql] sql_set_user escaped user --> 'altair'
+Tue May  9 04:11:04 2017 : Info: [sql] 	expand: %{User-Password} -> zionLDAP
+Tue May  9 04:11:04 2017 : Info: [sql] 	expand: INSERT INTO radpostauth                           (username, pass, reply, authdate)                           VALUES (                           '%{User-Name}',                           '%{%{User-Password}:-%{Chap-Password}}',                           '%{reply:Packet-Type}', '%S') -> INSERT INTO radpostauth                           (username, pass, reply, authdate)                           VALUES (                           'altair',                           'zionLDAP',                           'Access-Accept', '2017-05-09 04:11:04')
+Tue May  9 04:11:04 2017 : Debug: rlm_sql (sql) in sql_postauth: query is INSERT INTO radpostauth                           (username, pass, reply, authdate)                           VALUES (                           'altair',                           'zionLDAP',                           'Access-Accept', '2017-05-09 04:11:04')
+Tue May  9 04:11:04 2017 : Debug: rlm_sql (sql): Reserving sql socket id: 27
+Tue May  9 04:11:04 2017 : Debug: rlm_sql (sql): Released sql socket id: 27
+Tue May  9 04:11:04 2017 : Info: ++[sql] = ok
+Tue May  9 04:11:04 2017 : Info: [sql_log] Processing sql_log_postauth
+Tue May  9 04:11:04 2017 : Info: [sql_log] 	expand: %{User-Name} -> altair
+Tue May  9 04:11:04 2017 : Info: [sql_log] 	expand: %{%{User-Name}:-DEFAULT} -> altair
+Tue May  9 04:11:04 2017 : Info: [sql_log] sql_set_user escaped user --> 'altair'
+Tue May  9 04:11:04 2017 : Info: [sql_log] WARNING: Deprecated conditional expansion ":-".  See "man unlang" for details
+Tue May  9 04:11:04 2017 : Info: [sql_log] 	expand: INSERT INTO radpostauth                   	 (username, pass, reply, authdate) VALUES                    	 ('%{User-Name}', '%{User-Password:-Chap-Password}',         	 '%{reply:Packet-Type}', '%S'); -> INSERT INTO radpostauth                   	 (username, pass, reply, authdate) VALUES                    	 ('altair', 'zionLDAP',         	 'Access-Accept', '2017-05-09 04:11:04');
+Tue May  9 04:11:04 2017 : Info: [sql_log] 	expand: /var/log/freeradius/radacct/sql-relay -> /var/log/freeradius/radacct/sql-relay
+Tue May  9 04:11:04 2017 : Info: ++[sql_log] = ok
+Tue May  9 04:11:04 2017 : Info: ++[exec] = noop
+Tue May  9 04:11:04 2017 : Info: +} # group post-auth = ok
+Sending Access-Accept of id 210 to 127.0.0.1 port 50039
+Tue May  9 04:11:04 2017 : Info: Finished request 2.
+Tue May  9 04:11:04 2017 : Debug: Going to the next request
+Tue May  9 04:11:04 2017 : Debug: Waking up in 4.9 seconds.
+Tue May  9 04:11:09 2017 : Info: Cleaning up request 2 ID 210 with timestamp +114
+Tue May  9 04:11:09 2017 : Info: Ready to process requests.
+
+
+###
+CAPTURA DESDE EL AP WIFI
+###
+
+rad_recv: Access-Request packet from host 192.168.2.254 port 2050, id=1, length=58
+	User-Name = "altair"
+	NAS-Port = 1
+	NAS-Port-Type = Wireless-802.11
+	User-Password = "zionLDAP"
+Tue May  9 05:02:51 2017 : Info: # Executing section authorize from file /etc/freeradius/sites-enabled/default
+Tue May  9 05:02:51 2017 : Info: +group authorize {
+Tue May  9 05:02:51 2017 : Info: ++[preprocess] = ok
+Tue May  9 05:02:51 2017 : Info: ++[chap] = noop
+Tue May  9 05:02:51 2017 : Info: ++[mschap] = noop
+Tue May  9 05:02:51 2017 : Info: ++[digest] = noop
+Tue May  9 05:02:51 2017 : Info: [suffix] No '@' in User-Name = "altair", looking up realm NULL
+Tue May  9 05:02:51 2017 : Info: [suffix] No such realm "NULL"
+Tue May  9 05:02:51 2017 : Info: ++[suffix] = noop
+Tue May  9 05:02:51 2017 : Info: [eap] No EAP-Message, not doing EAP
+Tue May  9 05:02:51 2017 : Info: ++[eap] = noop
+Tue May  9 05:02:51 2017 : Info: [files] users: Matched entry altair at line 76
+Tue May  9 05:02:51 2017 : Info: ++[files] = ok
+Tue May  9 05:02:51 2017 : Info: [sql] 	expand: %{User-Name} -> altair
+Tue May  9 05:02:51 2017 : Info: [sql] sql_set_user escaped user --> 'altair'
+Tue May  9 05:02:51 2017 : Debug: rlm_sql (sql): Reserving sql socket id: 10
+Tue May  9 05:02:51 2017 : Info: [sql] 	expand: SELECT id, username, attribute, value, op           FROM radcheck           WHERE username = '%{SQL-User-Name}'           ORDER BY id -> SELECT id, username, attribute, value, op           FROM radcheck           WHERE username = 'altair'           ORDER BY id
+Tue May  9 05:02:51 2017 : Debug: WARNING: Found User-Password == "...".
+Tue May  9 05:02:51 2017 : Debug: WARNING: Are you sure you don't mean Cleartext-Password?
+Tue May  9 05:02:51 2017 : Debug: WARNING: See "man rlm_pap" for more information.
+Tue May  9 05:02:51 2017 : Info: [sql] 	expand: SELECT groupname           FROM radusergroup           WHERE username = '%{SQL-User-Name}'           ORDER BY priority -> SELECT groupname           FROM radusergroup           WHERE username = 'altair'           ORDER BY priority
+Tue May  9 05:02:51 2017 : Debug: rlm_sql (sql): Released sql socket id: 10
+Tue May  9 05:02:51 2017 : Info: [sql] User altair not found
+Tue May  9 05:02:51 2017 : Info: ++[sql] = notfound
+Tue May  9 05:02:51 2017 : Info: [ldap] performing user authorization for altair
+Tue May  9 05:02:51 2017 : Info: [ldap] 	expand: %{Stripped-User-Name} -> 
+Tue May  9 05:02:51 2017 : Info: [ldap] 	... expanding second conditional
+Tue May  9 05:02:51 2017 : Info: [ldap] 	expand: %{User-Name} -> altair
+Tue May  9 05:02:51 2017 : Info: [ldap] 	expand: (uid=%{%{Stripped-User-Name}:-%{User-Name}}) -> (uid=altair)
+Tue May  9 05:02:51 2017 : Info: [ldap] 	expand: ou=people,dc=zion,dc=com -> ou=people,dc=zion,dc=com
+Tue May  9 05:02:51 2017 : Debug:   [ldap] ldap_get_conn: Checking Id: 0
+Tue May  9 05:02:51 2017 : Debug:   [ldap] ldap_get_conn: Got Id: 0
+Tue May  9 05:02:51 2017 : Debug:   [ldap] performing search in ou=people,dc=zion,dc=com, with filter (uid=altair)
+Tue May  9 05:02:51 2017 : Info: [ldap] No default NMAS login sequence
+Tue May  9 05:02:51 2017 : Info: [ldap] looking for check items in directory...
+Tue May  9 05:02:51 2017 : Debug:   [ldap] userPassword -> Password-With-Header == "zionLDAP"
+Tue May  9 05:02:51 2017 : Info: [ldap] looking for reply items in directory...
+Tue May  9 05:02:51 2017 : Info: [ldap] Setting Auth-Type = LDAP
+Tue May  9 05:02:51 2017 : Debug:   [ldap] ldap_release_conn: Release Id: 0
+Tue May  9 05:02:51 2017 : Info: ++[ldap] = ok
+Tue May  9 05:02:51 2017 : Info: ++[expiration] = noop
+Tue May  9 05:02:51 2017 : Info: ++[logintime] = noop
+Tue May  9 05:02:51 2017 : Info: [pap] Config already contains "known good" password.  Ignoring Password-With-Header
+Tue May  9 05:02:51 2017 : Info: [pap] WARNING: Auth-Type already set.  Not setting to PAP
+Tue May  9 05:02:51 2017 : Info: ++[pap] = noop
+Tue May  9 05:02:51 2017 : Info: +} # group authorize = ok
+Tue May  9 05:02:51 2017 : Info: Found Auth-Type = LDAP
+Tue May  9 05:02:51 2017 : Info: # Executing group from file /etc/freeradius/sites-enabled/default
+Tue May  9 05:02:51 2017 : Info: +group LDAP {
+Tue May  9 05:02:51 2017 : Info: [ldap] login attempt by "altair" with password "zionLDAP"
+Tue May  9 05:02:51 2017 : Info: [ldap] user DN: cn=altair,ou=people,dc=zion,dc=com
+Tue May  9 05:02:51 2017 : Debug:   [ldap] (re)connect to ldap.zion.com:389, authentication 1
+Tue May  9 05:02:51 2017 : Debug:   [ldap] bind as cn=altair,ou=people,dc=zion,dc=com/zionLDAP to ldap.zion.com:389
+Tue May  9 05:02:51 2017 : Debug:   [ldap] waiting for bind result ...
+Tue May  9 05:02:51 2017 : Debug:   [ldap] Bind was successful
+Tue May  9 05:02:51 2017 : Info: [ldap] user altair authenticated succesfully
+Tue May  9 05:02:51 2017 : Info: ++[ldap] = ok
+Tue May  9 05:02:51 2017 : Info: +} # group LDAP = ok
+Tue May  9 05:02:51 2017 : Info: # Executing section post-auth from file /etc/freeradius/sites-enabled/default
+Tue May  9 05:02:51 2017 : Info: +group post-auth {
+Tue May  9 05:02:51 2017 : Info: [sql] 	expand: %{User-Name} -> altair
+Tue May  9 05:02:51 2017 : Info: [sql] sql_set_user escaped user --> 'altair'
+Tue May  9 05:02:51 2017 : Info: [sql] 	expand: %{User-Password} -> zionLDAP
+Tue May  9 05:02:51 2017 : Info: [sql] 	expand: INSERT INTO radpostauth                           (username, pass, reply, authdate)                           VALUES (                           '%{User-Name}',                           '%{%{User-Password}:-%{Chap-Password}}',                           '%{reply:Packet-Type}', '%S') -> INSERT INTO radpostauth                           (username, pass, reply, authdate)                           VALUES (                           'altair',                           'zionLDAP',                           'Access-Accept', '2017-05-09 05:02:51')
+Tue May  9 05:02:51 2017 : Debug: rlm_sql (sql) in sql_postauth: query is INSERT INTO radpostauth                           (username, pass, reply, authdate)                           VALUES (                           'altair',                           'zionLDAP',                           'Access-Accept', '2017-05-09 05:02:51')
+Tue May  9 05:02:51 2017 : Debug: rlm_sql (sql): Reserving sql socket id: 9
+Tue May  9 05:02:51 2017 : Debug: rlm_sql (sql): Released sql socket id: 9
+Tue May  9 05:02:51 2017 : Info: ++[sql] = ok
+Tue May  9 05:02:51 2017 : Info: [sql_log] Processing sql_log_postauth
+Tue May  9 05:02:51 2017 : Info: [sql_log] 	expand: %{User-Name} -> altair
+Tue May  9 05:02:51 2017 : Info: [sql_log] 	expand: %{%{User-Name}:-DEFAULT} -> altair
+Tue May  9 05:02:51 2017 : Info: [sql_log] sql_set_user escaped user --> 'altair'
+Tue May  9 05:02:51 2017 : Info: [sql_log] WARNING: Deprecated conditional expansion ":-".  See "man unlang" for details
+Tue May  9 05:02:51 2017 : Info: [sql_log] 	expand: INSERT INTO radpostauth                   	 (username, pass, reply, authdate) VALUES                    	 ('%{User-Name}', '%{User-Password:-Chap-Password}',         	 '%{reply:Packet-Type}', '%S'); -> INSERT INTO radpostauth                   	 (username, pass, reply, authdate) VALUES                    	 ('altair', 'zionLDAP',         	 'Access-Accept', '2017-05-09 05:02:51');
+Tue May  9 05:02:51 2017 : Info: [sql_log] 	expand: /var/log/freeradius/radacct/sql-relay -> /var/log/freeradius/radacct/sql-relay
+Tue May  9 05:02:51 2017 : Info: ++[sql_log] = ok
+Tue May  9 05:02:51 2017 : Info: ++[exec] = noop
+Tue May  9 05:02:51 2017 : Info: +} # group post-auth = ok
+Sending Access-Accept of id 1 to 192.168.2.254 port 2050
+Tue May  9 05:02:51 2017 : Info: Finished request 10.
+Tue May  9 05:02:51 2017 : Debug: Going to the next request
+Tue May  9 05:02:51 2017 : Debug: Waking up in 4.9 seconds.
+Tue May  9 05:02:56 2017 : Info: Cleaning up request 10 ID 1 with timestamp +43
+Tue May  9 05:02:56 2017 : Info: Ready to process requests.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+###
+CAPTURA  AP WIFI  ----> autenticación mediante un ap wifi y usuario LDAP.
+###
+
+rad_recv: Access-Request packet from host 192.168.2.254 port 2049, id=0, length=125
+	User-Name = "altair"
+	NAS-IP-Address = 192.168.2.254
+	Called-Station-Id = "687f749cab27"
+	Calling-Station-Id = "b49d0b58f358"
+	NAS-Identifier = "687f749cab27"
+	NAS-Port = 51
+	Framed-MTU = 1400
+	NAS-Port-Type = Wireless-802.11
+	EAP-Message = 0x0200000b01616c74616972
+	Message-Authenticator = 0x2d2a47ac8bbb8476767691e63cd9cbd8
+Tue May  9 04:40:23 2017 : Info: # Executing section authorize from file /etc/freeradius/sites-enabled/default
+Tue May  9 04:40:23 2017 : Info: +group authorize {
+Tue May  9 04:40:23 2017 : Info: ++[preprocess] = ok
+Tue May  9 04:40:23 2017 : Info: ++[chap] = noop
+Tue May  9 04:40:23 2017 : Info: ++[mschap] = noop
+Tue May  9 04:40:23 2017 : Info: ++[digest] = noop
+Tue May  9 04:40:23 2017 : Info: [suffix] No '@' in User-Name = "altair", looking up realm NULL
+Tue May  9 04:40:23 2017 : Info: [suffix] No such realm "NULL"
+Tue May  9 04:40:23 2017 : Info: ++[suffix] = noop
+Tue May  9 04:40:23 2017 : Info: [eap] EAP packet type response id 0 length 11
+Tue May  9 04:40:23 2017 : Info: [eap] No EAP Start, assuming it's an on-going EAP conversation
+Tue May  9 04:40:23 2017 : Info: ++[eap] = updated
+Tue May  9 04:40:23 2017 : Info: [files] users: Matched entry altair at line 76
+Tue May  9 04:40:23 2017 : Info: ++[files] = ok
+Tue May  9 04:40:23 2017 : Info: [sql] 	expand: %{User-Name} -> altair
+Tue May  9 04:40:23 2017 : Info: [sql] sql_set_user escaped user --> 'altair'
+Tue May  9 04:40:23 2017 : Debug: rlm_sql (sql): Reserving sql socket id: 30
+Tue May  9 04:40:23 2017 : Info: [sql] 	expand: SELECT id, username, attribute, value, op           FROM radcheck           WHERE username = '%{SQL-User-Name}'           ORDER BY id -> SELECT id, username, attribute, value, op           FROM radcheck           WHERE username = 'altair'           ORDER BY id
+Tue May  9 04:40:23 2017 : Debug: WARNING: Found User-Password == "...".
+Tue May  9 04:40:23 2017 : Debug: WARNING: Are you sure you don't mean Cleartext-Password?
+Tue May  9 04:40:23 2017 : Debug: WARNING: See "man rlm_pap" for more information.
+Tue May  9 04:40:23 2017 : Info: [sql] User found in radcheck table
+Tue May  9 04:40:23 2017 : Info: [sql] 	expand: SELECT id, username, attribute, value, op           FROM radreply           WHERE username = '%{SQL-User-Name}'           ORDER BY id -> SELECT id, username, attribute, value, op           FROM radreply           WHERE username = 'altair'           ORDER BY id
+Tue May  9 04:40:23 2017 : Info: [sql] 	expand: SELECT groupname           FROM radusergroup           WHERE username = '%{SQL-User-Name}'           ORDER BY priority -> SELECT groupname           FROM radusergroup           WHERE username = 'altair'           ORDER BY priority
+Tue May  9 04:40:23 2017 : Debug: rlm_sql (sql): Released sql socket id: 30
+Tue May  9 04:40:23 2017 : Info: ++[sql] = ok
+Tue May  9 04:40:23 2017 : Info: [ldap] performing user authorization for altair
+Tue May  9 04:40:23 2017 : Info: [ldap] 	expand: %{Stripped-User-Name} -> 
+Tue May  9 04:40:23 2017 : Info: [ldap] 	... expanding second conditional
+Tue May  9 04:40:23 2017 : Info: [ldap] 	expand: %{User-Name} -> altair
+Tue May  9 04:40:23 2017 : Info: [ldap] 	expand: (uid=%{%{Stripped-User-Name}:-%{User-Name}}) -> (uid=altair)
+Tue May  9 04:40:23 2017 : Info: [ldap] 	expand: ou=people,dc=zion,dc=com -> ou=people,dc=zion,dc=com
+Tue May  9 04:40:23 2017 : Debug:   [ldap] ldap_get_conn: Checking Id: 0
+Tue May  9 04:40:23 2017 : Debug:   [ldap] ldap_get_conn: Got Id: 0
+Tue May  9 04:40:23 2017 : Debug:   [ldap] attempting LDAP reconnection
+Tue May  9 04:40:23 2017 : Debug:   [ldap] (re)connect to ldap.zion.com:389, authentication 0
+Tue May  9 04:40:23 2017 : Debug:   [ldap] bind as cn=Manager,dc=zion,dc=com/secret to ldap.zion.com:389
+Tue May  9 04:40:23 2017 : Debug:   [ldap] waiting for bind result ...
+Tue May  9 04:40:23 2017 : Debug:   [ldap] Bind was successful
+Tue May  9 04:40:23 2017 : Debug:   [ldap] performing search in ou=people,dc=zion,dc=com, with filter (uid=altair)
+Tue May  9 04:40:23 2017 : Info: [ldap] No default NMAS login sequence
+Tue May  9 04:40:23 2017 : Info: [ldap] looking for check items in directory...
+Tue May  9 04:40:23 2017 : Debug:   [ldap] userPassword -> Password-With-Header == "zionLDAP"
+Tue May  9 04:40:23 2017 : Info: [ldap] looking for reply items in directory...
+Tue May  9 04:40:23 2017 : Debug:   [ldap] ldap_release_conn: Release Id: 0
+Tue May  9 04:40:23 2017 : Info: ++[ldap] = ok
+Tue May  9 04:40:23 2017 : Info: ++[expiration] = noop
+Tue May  9 04:40:23 2017 : Info: ++[logintime] = noop
+Tue May  9 04:40:23 2017 : Info: [pap] Config already contains "known good" password.  Ignoring Password-With-Header
+Tue May  9 04:40:23 2017 : Info: [pap] WARNING: Auth-Type already set.  Not setting to PAP
+Tue May  9 04:40:23 2017 : Info: ++[pap] = noop
+Tue May  9 04:40:23 2017 : Info: +} # group authorize = updated
+Tue May  9 04:40:23 2017 : Info: Found Auth-Type = EAP
+Tue May  9 04:40:23 2017 : Info: # Executing group from file /etc/freeradius/sites-enabled/default
+Tue May  9 04:40:23 2017 : Info: +group authenticate {
+Tue May  9 04:40:23 2017 : Info: [eap] EAP Identity
+Tue May  9 04:40:23 2017 : Info: [eap] processing type md5
+Tue May  9 04:40:23 2017 : Debug: rlm_eap_md5: Issuing Challenge
+Tue May  9 04:40:23 2017 : Info: ++[eap] = handled
+Tue May  9 04:40:23 2017 : Info: +} # group authenticate = handled
+Sending Access-Challenge of id 0 to 192.168.2.254 port 2049
+	EAP-Message = 0x010100160410d0f395f03b0c37f6df7eea83f6444c00
+	Message-Authenticator = 0x00000000000000000000000000000000
+	State = 0xd7f80496d7f900ad5c0b5935e031cae1
+Tue May  9 04:40:23 2017 : Info: Finished request 0.
+Tue May  9 04:40:23 2017 : Debug: Going to the next request
+Tue May  9 04:40:23 2017 : Debug: Waking up in 4.9 seconds.
+rad_recv: Access-Request packet from host 192.168.2.254 port 2049, id=0, length=138
+Tue May  9 04:40:23 2017 : Info: Cleaning up request 0 ID 0 with timestamp +103
+	User-Name = "altair"
+	NAS-IP-Address = 192.168.2.254
+	Called-Station-Id = "687f749cab27"
+	Calling-Station-Id = "b49d0b58f358"
+	NAS-Identifier = "687f749cab27"
+	NAS-Port = 51
+	Framed-MTU = 1400
+	State = 0xd7f80496d7f900ad5c0b5935e031cae1
+	NAS-Port-Type = Wireless-802.11
+	EAP-Message = 0x020100060319
+	Message-Authenticator = 0xcb083674e2407c98a5b531fcc924bca1
+Tue May  9 04:40:23 2017 : Info: # Executing section authorize from file /etc/freeradius/sites-enabled/default
+Tue May  9 04:40:23 2017 : Info: +group authorize {
+Tue May  9 04:40:23 2017 : Info: ++[preprocess] = ok
+Tue May  9 04:40:23 2017 : Info: ++[chap] = noop
+Tue May  9 04:40:23 2017 : Info: ++[mschap] = noop
+Tue May  9 04:40:23 2017 : Info: ++[digest] = noop
+Tue May  9 04:40:23 2017 : Info: [suffix] No '@' in User-Name = "altair", looking up realm NULL
+Tue May  9 04:40:23 2017 : Info: [suffix] No such realm "NULL"
+Tue May  9 04:40:23 2017 : Info: ++[suffix] = noop
+Tue May  9 04:40:23 2017 : Info: [eap] EAP packet type response id 1 length 6
+Tue May  9 04:40:23 2017 : Info: [eap] No EAP Start, assuming it's an on-going EAP conversation
+Tue May  9 04:40:23 2017 : Info: ++[eap] = updated
+Tue May  9 04:40:23 2017 : Info: [files] users: Matched entry altair at line 76
+Tue May  9 04:40:23 2017 : Info: ++[files] = ok
+Tue May  9 04:40:23 2017 : Info: [sql] 	expand: %{User-Name} -> altair
+Tue May  9 04:40:23 2017 : Info: [sql] sql_set_user escaped user --> 'altair'
+Tue May  9 04:40:23 2017 : Debug: rlm_sql (sql): Reserving sql socket id: 29
+Tue May  9 04:40:23 2017 : Info: [sql] 	expand: SELECT id, username, attribute, value, op           FROM radcheck           WHERE username = '%{SQL-User-Name}'           ORDER BY id -> SELECT id, username, attribute, value, op           FROM radcheck           WHERE username = 'altair'           ORDER BY id
+Tue May  9 04:40:23 2017 : Debug: WARNING: Found User-Password == "...".
+Tue May  9 04:40:23 2017 : Debug: WARNING: Are you sure you don't mean Cleartext-Password?
+Tue May  9 04:40:23 2017 : Debug: WARNING: See "man rlm_pap" for more information.
+Tue May  9 04:40:23 2017 : Info: [sql] User found in radcheck table
+Tue May  9 04:40:23 2017 : Info: [sql] 	expand: SELECT id, username, attribute, value, op           FROM radreply           WHERE username = '%{SQL-User-Name}'           ORDER BY id -> SELECT id, username, attribute, value, op           FROM radreply           WHERE username = 'altair'           ORDER BY id
+Tue May  9 04:40:23 2017 : Info: [sql] 	expand: SELECT groupname           FROM radusergroup           WHERE username = '%{SQL-User-Name}'           ORDER BY priority -> SELECT groupname           FROM radusergroup           WHERE username = 'altair'           ORDER BY priority
+Tue May  9 04:40:23 2017 : Debug: rlm_sql (sql): Released sql socket id: 29
+Tue May  9 04:40:23 2017 : Info: ++[sql] = ok
+Tue May  9 04:40:23 2017 : Info: [ldap] performing user authorization for altair
+Tue May  9 04:40:23 2017 : Info: [ldap] 	expand: %{Stripped-User-Name} -> 
+Tue May  9 04:40:23 2017 : Info: [ldap] 	... expanding second conditional
+Tue May  9 04:40:23 2017 : Info: [ldap] 	expand: %{User-Name} -> altair
+Tue May  9 04:40:23 2017 : Info: [ldap] 	expand: (uid=%{%{Stripped-User-Name}:-%{User-Name}}) -> (uid=altair)
+Tue May  9 04:40:23 2017 : Info: [ldap] 	expand: ou=people,dc=zion,dc=com -> ou=people,dc=zion,dc=com
+Tue May  9 04:40:23 2017 : Debug:   [ldap] ldap_get_conn: Checking Id: 0
+Tue May  9 04:40:23 2017 : Debug:   [ldap] ldap_get_conn: Got Id: 0
+Tue May  9 04:40:23 2017 : Debug:   [ldap] performing search in ou=people,dc=zion,dc=com, with filter (uid=altair)
+Tue May  9 04:40:23 2017 : Info: [ldap] No default NMAS login sequence
+Tue May  9 04:40:23 2017 : Info: [ldap] looking for check items in directory...
+Tue May  9 04:40:23 2017 : Debug:   [ldap] userPassword -> Password-With-Header == "zionLDAP"
+Tue May  9 04:40:23 2017 : Info: [ldap] looking for reply items in directory...
+Tue May  9 04:40:23 2017 : Debug:   [ldap] ldap_release_conn: Release Id: 0
+Tue May  9 04:40:23 2017 : Info: ++[ldap] = ok
+Tue May  9 04:40:23 2017 : Info: ++[expiration] = noop
+Tue May  9 04:40:23 2017 : Info: ++[logintime] = noop
+Tue May  9 04:40:23 2017 : Info: [pap] Config already contains "known good" password.  Ignoring Password-With-Header
+Tue May  9 04:40:23 2017 : Info: [pap] WARNING: Auth-Type already set.  Not setting to PAP
+Tue May  9 04:40:23 2017 : Info: ++[pap] = noop
+Tue May  9 04:40:23 2017 : Info: +} # group authorize = updated
+Tue May  9 04:40:23 2017 : Info: Found Auth-Type = EAP
+Tue May  9 04:40:23 2017 : Info: # Executing group from file /etc/freeradius/sites-enabled/default
+Tue May  9 04:40:23 2017 : Info: +group authenticate {
+Tue May  9 04:40:23 2017 : Info: [eap] Request found, released from the list
+Tue May  9 04:40:23 2017 : Info: [eap] EAP NAK
+Tue May  9 04:40:23 2017 : Info: [eap] EAP-NAK asked for EAP-Type/peap
+Tue May  9 04:40:23 2017 : Info: [eap] processing type tls
+Tue May  9 04:40:23 2017 : Info: [tls] Initiate
+Tue May  9 04:40:23 2017 : Info: [tls] Start returned 1
+Tue May  9 04:40:23 2017 : Info: ++[eap] = handled
+Tue May  9 04:40:23 2017 : Info: +} # group authenticate = handled
+Sending Access-Challenge of id 0 to 192.168.2.254 port 2049
+	EAP-Message = 0x010200061920
+	Message-Authenticator = 0x00000000000000000000000000000000
+	State = 0xd7f80496d6fa1dad5c0b5935e031cae1
+Tue May  9 04:40:23 2017 : Info: Finished request 1.
+Tue May  9 04:40:23 2017 : Debug: Going to the next request
+Tue May  9 04:40:23 2017 : Debug: Waking up in 4.9 seconds.
+rad_recv: Access-Request packet from host 192.168.2.254 port 2049, id=0, length=300
+Tue May  9 04:40:23 2017 : Info: Cleaning up request 1 ID 0 with timestamp +103
+	User-Name = "altair"
+	NAS-IP-Address = 192.168.2.254
+	Called-Station-Id = "687f749cab27"
+	Calling-Station-Id = "b49d0b58f358"
+	NAS-Identifier = "687f749cab27"
+	NAS-Port = 51
+	Framed-MTU = 1400
+	State = 0xd7f80496d6fa1dad5c0b5935e031cae1
+	NAS-Port-Type = Wireless-802.11
+	EAP-Message = 0x020200a819800000009e160301009901000095030397e1ce6cf2f2ead35781307e70df2e6e2ec77abadad6ddc6a0eff62f4169762000003cc02cc030009fc02bc02f009ec00ac024c014c0280039006bc009c023c013c02700330067c007c011009d009c0035003d002f003c00050004000a00ff0100003000170000000d001600140601060305010503040104030301030302010203000b00020100000a00080006001700180019
+	Message-Authenticator = 0xa1367f3efd60b0d9c960fc40df803855
+Tue May  9 04:40:23 2017 : Info: # Executing section authorize from file /etc/freeradius/sites-enabled/default
+Tue May  9 04:40:23 2017 : Info: +group authorize {
+Tue May  9 04:40:23 2017 : Info: ++[preprocess] = ok
+Tue May  9 04:40:23 2017 : Info: ++[chap] = noop
+Tue May  9 04:40:23 2017 : Info: ++[mschap] = noop
+Tue May  9 04:40:23 2017 : Info: ++[digest] = noop
+Tue May  9 04:40:23 2017 : Info: [suffix] No '@' in User-Name = "altair", looking up realm NULL
+Tue May  9 04:40:23 2017 : Info: [suffix] No such realm "NULL"
+Tue May  9 04:40:23 2017 : Info: ++[suffix] = noop
+Tue May  9 04:40:23 2017 : Info: [eap] EAP packet type response id 2 length 168
+Tue May  9 04:40:23 2017 : Info: [eap] Continuing tunnel setup.
+Tue May  9 04:40:23 2017 : Info: ++[eap] = ok
+Tue May  9 04:40:23 2017 : Info: +} # group authorize = ok
+Tue May  9 04:40:23 2017 : Info: Found Auth-Type = EAP
+Tue May  9 04:40:23 2017 : Info: # Executing group from file /etc/freeradius/sites-enabled/default
+Tue May  9 04:40:23 2017 : Info: +group authenticate {
+Tue May  9 04:40:23 2017 : Info: [eap] Request found, released from the list
+Tue May  9 04:40:23 2017 : Info: [eap] EAP/peap
+Tue May  9 04:40:23 2017 : Info: [eap] processing type peap
+Tue May  9 04:40:23 2017 : Info: [peap] processing EAP-TLS
+Tue May  9 04:40:23 2017 : Debug:   TLS Length 158
+Tue May  9 04:40:23 2017 : Info: [peap] Length Included
+Tue May  9 04:40:23 2017 : Info: [peap] eaptls_verify returned 11 
+Tue May  9 04:40:23 2017 : Info: [peap]     (other): before/accept initialization
+Tue May  9 04:40:23 2017 : Info: [peap]     TLS_accept: before/accept initialization
+Tue May  9 04:40:23 2017 : Info: [peap] <<< TLS 1.0 Handshake [length 0099], ClientHello  
+Tue May  9 04:40:23 2017 : Info: [peap]     TLS_accept: unknown state
+Tue May  9 04:40:23 2017 : Info: [peap] >>> TLS 1.0 Handshake [length 0039], ServerHello  
+Tue May  9 04:40:23 2017 : Info: [peap]     TLS_accept: unknown state
+Tue May  9 04:40:23 2017 : Info: [peap] >>> TLS 1.0 Handshake [length 07fb], Certificate  
+Tue May  9 04:40:23 2017 : Info: [peap]     TLS_accept: unknown state
+Tue May  9 04:40:23 2017 : Info: [peap] >>> TLS 1.0 Handshake [length 014b], ServerKeyExchange  
+Tue May  9 04:40:23 2017 : Info: [peap]     TLS_accept: unknown state
+Tue May  9 04:40:23 2017 : Info: [peap] >>> TLS 1.0 Handshake [length 0004], ServerHelloDone  
+Tue May  9 04:40:23 2017 : Info: [peap]     TLS_accept: unknown state
+Tue May  9 04:40:23 2017 : Info: [peap]     TLS_accept: unknown state
+Tue May  9 04:40:23 2017 : Info: [peap]     TLS_accept: Need to read more data: unknown state
+Tue May  9 04:40:23 2017 : Debug: In SSL Handshake Phase 
+Tue May  9 04:40:23 2017 : Debug: In SSL Accept mode  
+Tue May  9 04:40:23 2017 : Info: [peap] eaptls_process returned 13 
+Tue May  9 04:40:23 2017 : Info: [peap] EAPTLS_HANDLED
+Tue May  9 04:40:23 2017 : Info: ++[eap] = handled
+Tue May  9 04:40:23 2017 : Info: +} # group authenticate = handled
+Sending Access-Challenge of id 0 to 192.168.2.254 port 2049
+	EAP-Message = 0x0103040019c0000009971603010039020000350301f2c73ed905b4e1be5e6d4e23a53a7035d5542ba0e89a3ebd543d36a872955cb800c01400000dff01000100000b00040300010216030107fb0b0007f70007f40003c9308203c5308202ad020900eaaf953e83dadddf300d06092a864886f70d01010b05003081a6310b30090603550406130245733112301006035504080c0942415243454c4f4e41310f300d06035504070c064d415441524f31143012060355040a0c0b5a696f6e536f63696574793120301e060355040b0c17205465636e6f6c6f6769612073696e206361626c6573203111300f06035504030c087a696f6e2e636f6d31273025
+	EAP-Message = 0x06092a864886f70d0109011618616c746169722e74726162616a6f40676d61696c2e636f6d301e170d3137303530353038313632375a170d3138303931373038313632375a3081a1310b30090603550406130245733112301006035504080c0942617263656c6f6e61310f300d06035504070c064d617461726f31133011060355040a0c0a5a696f6e526164697573311d301b060355040b0c147a696f6e20776966692073696e206c696d6974653111300f06035504030c087a696f6e2e636f6d3126302406092a864886f70d0109011617616c746169722e74726162616a6f40676d61692e636f6d30820122300d06092a864886f70d010101050003
+	EAP-Message = 0x82010f003082010a0282010100e45e841bd53215f04556252d8377fadf030e8e7b97edceb24e9aa40f259e132238ca870012774848d80bcefe882ca1c8593bfdbd3851ac8c4c8ac4f741b67ad6d7af759c13e57e751643bc57584ef259cf48218f2ff56b5b4f670a7eb0de511f8d801182b44fa339f54cb0e20e7ea5b7d84aa408dc7bf8304020c23dd07c01df63b55917995dcf9eeb7537d5ae30245fcf59202672245dd977b29cadb75356246d9d091fcdeff9e99da8dd1911b9749621ece00db5733f67c2f2601d7b13c920b8e8601e4ea7f9d4995462bec3c14d883d4b97b7a5c66d4ee98aa2cd4f8f14256e9fe89db0d94eeb91a071bb7f4b7673
+	EAP-Message = 0x577b81675acbef7a8313008f40684fd50203010001300d06092a864886f70d01010b05000382010100410add66a3cf003a572d468b2840cf5e4444d4401e4159821d6fd512880417f77dab1698bd1695ee75380dae793bbacbc72915ecb783761c7ce31330a7e6d55854d7beede941004417fa9e7000f1485b5d228ee01085b2dead84fd9b09f7317a50e002d5fd34ee95dc7103576f8d433643a9d851b722a997f15b6f7ab36dc45885e87d6ad389e8ec4c09c6fd6b9088818044c8881d93f3d0cca2600a6a7638afadd9f5bbc99b830f895c09d5a7abf9e69169c9812fe10c0246e29c16da427f96ff3af30bbad963c72c028e465653ad878b524eba
+	EAP-Message = 0xeb4f9c2cec3654fb174d0e6f
+	Message-Authenticator = 0x00000000000000000000000000000000
+	State = 0xd7f80496d5fb1dad5c0b5935e031cae1
+Tue May  9 04:40:23 2017 : Info: Finished request 2.
+Tue May  9 04:40:23 2017 : Debug: Going to the next request
+Tue May  9 04:40:23 2017 : Debug: Waking up in 4.9 seconds.
+rad_recv: Access-Request packet from host 192.168.2.254 port 2049, id=0, length=138
+Tue May  9 04:40:23 2017 : Info: Cleaning up request 2 ID 0 with timestamp +103
+	User-Name = "altair"
+	NAS-IP-Address = 192.168.2.254
+	Called-Station-Id = "687f749cab27"
+	Calling-Station-Id = "b49d0b58f358"
+	NAS-Identifier = "687f749cab27"
+	NAS-Port = 51
+	Framed-MTU = 1400
+	State = 0xd7f80496d5fb1dad5c0b5935e031cae1
+	NAS-Port-Type = Wireless-802.11
+	EAP-Message = 0x020300061900
+	Message-Authenticator = 0x9b02acc5567e4d9ac9af52e61cbf92a2
+Tue May  9 04:40:23 2017 : Info: # Executing section authorize from file /etc/freeradius/sites-enabled/default
+Tue May  9 04:40:23 2017 : Info: +group authorize {
+Tue May  9 04:40:23 2017 : Info: ++[preprocess] = ok
+Tue May  9 04:40:23 2017 : Info: ++[chap] = noop
+Tue May  9 04:40:23 2017 : Info: ++[mschap] = noop
+Tue May  9 04:40:23 2017 : Info: ++[digest] = noop
+Tue May  9 04:40:23 2017 : Info: [suffix] No '@' in User-Name = "altair", looking up realm NULL
+Tue May  9 04:40:23 2017 : Info: [suffix] No such realm "NULL"
+Tue May  9 04:40:23 2017 : Info: ++[suffix] = noop
+Tue May  9 04:40:23 2017 : Info: [eap] EAP packet type response id 3 length 6
+Tue May  9 04:40:23 2017 : Info: [eap] Continuing tunnel setup.
+Tue May  9 04:40:23 2017 : Info: ++[eap] = ok
+Tue May  9 04:40:23 2017 : Info: +} # group authorize = ok
+Tue May  9 04:40:23 2017 : Info: Found Auth-Type = EAP
+Tue May  9 04:40:23 2017 : Info: # Executing group from file /etc/freeradius/sites-enabled/default
+Tue May  9 04:40:23 2017 : Info: +group authenticate {
+Tue May  9 04:40:23 2017 : Info: [eap] Request found, released from the list
+Tue May  9 04:40:23 2017 : Info: [eap] EAP/peap
+Tue May  9 04:40:23 2017 : Info: [eap] processing type peap
+Tue May  9 04:40:23 2017 : Info: [peap] processing EAP-TLS
+Tue May  9 04:40:23 2017 : Info: [peap] Received TLS ACK
+Tue May  9 04:40:23 2017 : Info: [peap] ACK handshake fragment handler
+Tue May  9 04:40:23 2017 : Info: [peap] eaptls_verify returned 1 
+Tue May  9 04:40:23 2017 : Info: [peap] eaptls_process returned 13 
+Tue May  9 04:40:23 2017 : Info: [peap] EAPTLS_HANDLED
+Tue May  9 04:40:23 2017 : Info: ++[eap] = handled
+Tue May  9 04:40:23 2017 : Info: +} # group authenticate = handled
+Sending Access-Challenge of id 0 to 192.168.2.254 port 2049
+	EAP-Message = 0x010403fc1940520ff4d4c2683174ec5489ca351b0bc6b871f252a52fe0dfcf2c103da82db1480004253082042130820309a0030201020209009981f468a22dd16d300d06092a864886f70d01010b05003081a6310b30090603550406130245733112301006035504080c0942415243454c4f4e41310f300d06035504070c064d415441524f31143012060355040a0c0b5a696f6e536f63696574793120301e060355040b0c17205465636e6f6c6f6769612073696e206361626c6573203111300f06035504030c087a696f6e2e636f6d3127302506092a864886f70d0109011618616c746169722e74726162616a6f40676d61696c2e636f6d301e170d
+	EAP-Message = 0x3137303530353038313235365a170d3238303531313038313235365a3081a6310b30090603550406130245733112301006035504080c0942415243454c4f4e41310f300d06035504070c064d415441524f31143012060355040a0c0b5a696f6e536f63696574793120301e060355040b0c17205465636e6f6c6f6769612073696e206361626c6573203111300f06035504030c087a696f6e2e636f6d3127302506092a864886f70d0109011618616c746169722e74726162616a6f40676d61696c2e636f6d30820122300d06092a864886f70d01010105000382010f003082010a0282010100efe3a9a1410caa064ba37c5429972129529a431cc02208
+	EAP-Message = 0x48604efa670b9598e1a4edf9f28fd6f7be7f5b69af18c640063bdb253ca01e37e1b3e4fdff60b1be7b92163b4ddb00bdacb7b198a0640d6b24f0ab65900ccae4b8a8e38e92fbb7915c66ccb30e4f54228c1861c8b630c0520ba610f670fab1e7ebe50bcf3cfb78c897da3ce6e7fc29770466443410dcc79ac652bc187e40027017a5b9821aba3e95cadc6ac5df552076b23521593bfcd03342507b4d7af7942c44e7e878e11ed2bf8f23a4dcecab4e5068e3d73c37a4c84954779fc9b1da898a9283e130755da2802f36554cd9758025cc46bc13e0c97b94d8afa9cdbb69a1db3e6415f5909f01b4d10203010001a350304e301d0603551d0e04160414
+	EAP-Message = 0x71a4359b491fe2ffaf18392b58cec19d9d17d538301f0603551d2304183016801471a4359b491fe2ffaf18392b58cec19d9d17d538300c0603551d13040530030101ff300d06092a864886f70d01010b05000382010100c5f9f722178d766c0972ee4c55b916ed21398cd00a2ed4b654f1f4a111181290c50e411ea169f1bdef558f93544aaa8c2242ae770a978bd91d37a7756d280c779ca25b711a0c5f0b4eea13f5c805a0300c5386e9931d416b1dc0adf770ea290fbccfb1f43e5413fffe9b68631221b62685c2b963af7e4fd930be39518a427a5294c3982978bfa8880dc5ac83f503291593cdf15e302e45f4fa39ee6a6a73feae40cf915ff3d3
+	EAP-Message = 0x54bf2c5200f0a0ce
+	Message-Authenticator = 0x00000000000000000000000000000000
+	State = 0xd7f80496d4fc1dad5c0b5935e031cae1
+Tue May  9 04:40:23 2017 : Info: Finished request 3.
+Tue May  9 04:40:23 2017 : Debug: Going to the next request
+Tue May  9 04:40:23 2017 : Debug: Waking up in 4.9 seconds.
+rad_recv: Access-Request packet from host 192.168.2.254 port 2049, id=0, length=138
+Tue May  9 04:40:23 2017 : Info: Cleaning up request 3 ID 0 with timestamp +103
+	User-Name = "altair"
+	NAS-IP-Address = 192.168.2.254
+	Called-Station-Id = "687f749cab27"
+	Calling-Station-Id = "b49d0b58f358"
+	NAS-Identifier = "687f749cab27"
+	NAS-Port = 51
+	Framed-MTU = 1400
+	State = 0xd7f80496d4fc1dad5c0b5935e031cae1
+	NAS-Port-Type = Wireless-802.11
+	EAP-Message = 0x020400061900
+	Message-Authenticator = 0x130e062e7c7e8bb561dc12c493dfe0ed
+Tue May  9 04:40:23 2017 : Info: # Executing section authorize from file /etc/freeradius/sites-enabled/default
+Tue May  9 04:40:23 2017 : Info: +group authorize {
+Tue May  9 04:40:23 2017 : Info: ++[preprocess] = ok
+Tue May  9 04:40:23 2017 : Info: ++[chap] = noop
+Tue May  9 04:40:23 2017 : Info: ++[mschap] = noop
+Tue May  9 04:40:23 2017 : Info: ++[digest] = noop
+Tue May  9 04:40:23 2017 : Info: [suffix] No '@' in User-Name = "altair", looking up realm NULL
+Tue May  9 04:40:23 2017 : Info: [suffix] No such realm "NULL"
+Tue May  9 04:40:23 2017 : Info: ++[suffix] = noop
+Tue May  9 04:40:23 2017 : Info: [eap] EAP packet type response id 4 length 6
+Tue May  9 04:40:23 2017 : Info: [eap] Continuing tunnel setup.
+Tue May  9 04:40:23 2017 : Info: ++[eap] = ok
+Tue May  9 04:40:23 2017 : Info: +} # group authorize = ok
+Tue May  9 04:40:23 2017 : Info: Found Auth-Type = EAP
+Tue May  9 04:40:23 2017 : Info: # Executing group from file /etc/freeradius/sites-enabled/default
+Tue May  9 04:40:23 2017 : Info: +group authenticate {
+Tue May  9 04:40:23 2017 : Info: [eap] Request found, released from the list
+Tue May  9 04:40:23 2017 : Info: [eap] EAP/peap
+Tue May  9 04:40:23 2017 : Info: [eap] processing type peap
+Tue May  9 04:40:23 2017 : Info: [peap] processing EAP-TLS
+Tue May  9 04:40:23 2017 : Info: [peap] Received TLS ACK
+Tue May  9 04:40:23 2017 : Info: [peap] ACK handshake fragment handler
+Tue May  9 04:40:23 2017 : Info: [peap] eaptls_verify returned 1 
+Tue May  9 04:40:23 2017 : Info: [peap] eaptls_process returned 13 
+Tue May  9 04:40:23 2017 : Info: [peap] EAPTLS_HANDLED
+Tue May  9 04:40:23 2017 : Info: ++[eap] = handled
+Tue May  9 04:40:23 2017 : Info: +} # group authenticate = handled
+Sending Access-Challenge of id 0 to 192.168.2.254 port 2049
+	EAP-Message = 0x010501b11900652d3c4605dc791f0f96a2e028236b5264ef3ff5e7777a95bd35eb79afec3aa807d5488324c5894fc3b517efc7e85b997765308b7a55d94a4e8958a51824c7c3ab64dd98a53725716b7a8e786c27c9e3884e160301014b0c00014703001741041920c80f58a0c5f4dfc66b0bc44013c7c8b3370d51130cb16f9f4f6dfe7e3d1feaa75179c8d87ccd433ce55a5c46ecde98c416bee00679e381186bf236e133e501008a74cbd49231643b5aa1ca3e25ccdb83071eefe6281eedc8ecdc06b0a973b01d71c570f767b850e0ac3ca67a9ffee5cb1f0c427f37b2e7b6b5d9221dfa4edf05fe1d2e64c7b2fff8255bd2e3c74f469e0a04854732
+	EAP-Message = 0xbda320fced421758d286b169b01c6e5a24588fd7906092ea6225d572ce483b63dabf6a415b59beec08c269cf43442e1d26ae1356ad0c36d7b3714b618b1501d3cef153b76f38f3226feb9a2a96e3ba80baa21c77eb4d7096c44f20cf9176871d81fcef45d1e3c02bdf7efc8fcc347bd9107208ad2867a6cdab1077b8cfd2e26cbc369ff09f6120f792851143d0d0722a1714a3471b172fada093728fb1f019bde4d67f5529f293e76fb5df16030100040e000000
+	Message-Authenticator = 0x00000000000000000000000000000000
+	State = 0xd7f80496d3fd1dad5c0b5935e031cae1
+Tue May  9 04:40:23 2017 : Info: Finished request 4.
+Tue May  9 04:40:23 2017 : Debug: Going to the next request
+Tue May  9 04:40:23 2017 : Debug: Waking up in 4.9 seconds.
+rad_recv: Access-Request packet from host 192.168.2.254 port 2049, id=0, length=276
+Tue May  9 04:40:23 2017 : Info: Cleaning up request 4 ID 0 with timestamp +103
+	User-Name = "altair"
+	NAS-IP-Address = 192.168.2.254
+	Called-Station-Id = "687f749cab27"
+	Calling-Station-Id = "b49d0b58f358"
+	NAS-Identifier = "687f749cab27"
+	NAS-Port = 51
+	Framed-MTU = 1400
+	State = 0xd7f80496d3fd1dad5c0b5935e031cae1
+	NAS-Port-Type = Wireless-802.11
+	EAP-Message = 0x0205009019800000008616030100461000004241049928d9b64c4bcc4dd7e762d6fffc3a51f8194cd1713693662409e1c445c5d9e479be266b7b2775040856e3e42c4d800bbb19d2260b322a0fd229ab091462bb041403010001011603010030a6afcff70e52e80d2d267f8a311ab720c78346008d68859ffc8968770118f9c9d3557bae8d9ea022960490673b3c73c7
+	Message-Authenticator = 0xff283847cdbaedad9e4bc28a8b4a44d2
+Tue May  9 04:40:23 2017 : Info: # Executing section authorize from file /etc/freeradius/sites-enabled/default
+Tue May  9 04:40:23 2017 : Info: +group authorize {
+Tue May  9 04:40:23 2017 : Info: ++[preprocess] = ok
+Tue May  9 04:40:23 2017 : Info: ++[chap] = noop
+Tue May  9 04:40:23 2017 : Info: ++[mschap] = noop
+Tue May  9 04:40:23 2017 : Info: ++[digest] = noop
+Tue May  9 04:40:23 2017 : Info: [suffix] No '@' in User-Name = "altair", looking up realm NULL
+Tue May  9 04:40:23 2017 : Info: [suffix] No such realm "NULL"
+Tue May  9 04:40:23 2017 : Info: ++[suffix] = noop
+Tue May  9 04:40:23 2017 : Info: [eap] EAP packet type response id 5 length 144
+Tue May  9 04:40:23 2017 : Info: [eap] Continuing tunnel setup.
+Tue May  9 04:40:23 2017 : Info: ++[eap] = ok
+Tue May  9 04:40:23 2017 : Info: +} # group authorize = ok
+Tue May  9 04:40:23 2017 : Info: Found Auth-Type = EAP
+Tue May  9 04:40:23 2017 : Info: # Executing group from file /etc/freeradius/sites-enabled/default
+Tue May  9 04:40:23 2017 : Info: +group authenticate {
+Tue May  9 04:40:23 2017 : Info: [eap] Request found, released from the list
+Tue May  9 04:40:23 2017 : Info: [eap] EAP/peap
+Tue May  9 04:40:23 2017 : Info: [eap] processing type peap
+Tue May  9 04:40:23 2017 : Info: [peap] processing EAP-TLS
+Tue May  9 04:40:23 2017 : Debug:   TLS Length 134
+Tue May  9 04:40:23 2017 : Info: [peap] Length Included
+Tue May  9 04:40:23 2017 : Info: [peap] eaptls_verify returned 11 
+Tue May  9 04:40:23 2017 : Info: [peap] <<< TLS 1.0 Handshake [length 0046], ClientKeyExchange  
+Tue May  9 04:40:23 2017 : Info: [peap]     TLS_accept: unknown state
+Tue May  9 04:40:23 2017 : Info: [peap]     TLS_accept: unknown state
+Tue May  9 04:40:23 2017 : Info: [peap] <<< TLS 1.0 ChangeCipherSpec [length 0001]  
+Tue May  9 04:40:23 2017 : Info: [peap] <<< TLS 1.0 Handshake [length 0010], Finished  
+Tue May  9 04:40:23 2017 : Info: [peap]     TLS_accept: unknown state
+Tue May  9 04:40:23 2017 : Info: [peap] >>> TLS 1.0 ChangeCipherSpec [length 0001]  
+Tue May  9 04:40:23 2017 : Info: [peap]     TLS_accept: unknown state
+Tue May  9 04:40:23 2017 : Info: [peap] >>> TLS 1.0 Handshake [length 0010], Finished  
+Tue May  9 04:40:23 2017 : Info: [peap]     TLS_accept: unknown state
+Tue May  9 04:40:23 2017 : Info: [peap]     TLS_accept: unknown state
+Tue May  9 04:40:23 2017 : Info: [peap]     (other): SSL negotiation finished successfully
+Tue May  9 04:40:23 2017 : Debug: SSL Connection Established 
+Tue May  9 04:40:23 2017 : Info: [peap] eaptls_process returned 13 
+Tue May  9 04:40:23 2017 : Info: [peap] EAPTLS_HANDLED
+Tue May  9 04:40:23 2017 : Info: ++[eap] = handled
+Tue May  9 04:40:23 2017 : Info: +} # group authenticate = handled
+Sending Access-Challenge of id 0 to 192.168.2.254 port 2049
+	EAP-Message = 0x0106004119001403010001011603010030976376c0cc4e442b43fb2b08478f8e810f29c5025576ada42c3aa4ac52484d4b7d422e9b1181575c974dbdff4f2dbb53
+	Message-Authenticator = 0x00000000000000000000000000000000
+	State = 0xd7f80496d2fe1dad5c0b5935e031cae1
+Tue May  9 04:40:23 2017 : Info: Finished request 5.
+Tue May  9 04:40:23 2017 : Debug: Going to the next request
+Tue May  9 04:40:23 2017 : Debug: Waking up in 4.9 seconds.
+rad_recv: Access-Request packet from host 192.168.2.254 port 2049, id=0, length=138
+Tue May  9 04:40:23 2017 : Info: Cleaning up request 5 ID 0 with timestamp +103
+	User-Name = "altair"
+	NAS-IP-Address = 192.168.2.254
+	Called-Station-Id = "687f749cab27"
+	Calling-Station-Id = "b49d0b58f358"
+	NAS-Identifier = "687f749cab27"
+	NAS-Port = 51
+	Framed-MTU = 1400
+	State = 0xd7f80496d2fe1dad5c0b5935e031cae1
+	NAS-Port-Type = Wireless-802.11
+	EAP-Message = 0x020600061900
+	Message-Authenticator = 0xcaaddd43338842350fb7876da720d466
+Tue May  9 04:40:23 2017 : Info: # Executing section authorize from file /etc/freeradius/sites-enabled/default
+Tue May  9 04:40:23 2017 : Info: +group authorize {
+Tue May  9 04:40:23 2017 : Info: ++[preprocess] = ok
+Tue May  9 04:40:23 2017 : Info: ++[chap] = noop
+Tue May  9 04:40:23 2017 : Info: ++[mschap] = noop
+Tue May  9 04:40:23 2017 : Info: ++[digest] = noop
+Tue May  9 04:40:23 2017 : Info: [suffix] No '@' in User-Name = "altair", looking up realm NULL
+Tue May  9 04:40:23 2017 : Info: [suffix] No such realm "NULL"
+Tue May  9 04:40:23 2017 : Info: ++[suffix] = noop
+Tue May  9 04:40:23 2017 : Info: [eap] EAP packet type response id 6 length 6
+Tue May  9 04:40:23 2017 : Info: [eap] Continuing tunnel setup.
+Tue May  9 04:40:23 2017 : Info: ++[eap] = ok
+Tue May  9 04:40:23 2017 : Info: +} # group authorize = ok
+Tue May  9 04:40:23 2017 : Info: Found Auth-Type = EAP
+Tue May  9 04:40:23 2017 : Info: # Executing group from file /etc/freeradius/sites-enabled/default
+Tue May  9 04:40:23 2017 : Info: +group authenticate {
+Tue May  9 04:40:23 2017 : Info: [eap] Request found, released from the list
+Tue May  9 04:40:23 2017 : Info: [eap] EAP/peap
+Tue May  9 04:40:23 2017 : Info: [eap] processing type peap
+Tue May  9 04:40:23 2017 : Info: [peap] processing EAP-TLS
+Tue May  9 04:40:23 2017 : Info: [peap] Received TLS ACK
+Tue May  9 04:40:23 2017 : Info: [peap] ACK handshake is finished
+Tue May  9 04:40:23 2017 : Info: [peap] eaptls_verify returned 3 
+Tue May  9 04:40:24 2017 : Info: [peap] eaptls_process returned 3 
+Tue May  9 04:40:24 2017 : Info: [peap] EAPTLS_SUCCESS
+Tue May  9 04:40:24 2017 : Info: [peap] Session established.  Decoding tunneled attributes.
+Tue May  9 04:40:24 2017 : Info: [peap] Peap state TUNNEL ESTABLISHED
+Tue May  9 04:40:24 2017 : Info: ++[eap] = handled
+Tue May  9 04:40:24 2017 : Info: +} # group authenticate = handled
+Sending Access-Challenge of id 0 to 192.168.2.254 port 2049
+	EAP-Message = 0x0107002b190017030100207dfe838f588698af5512df8e04251b46e110df4c0e591c56208b53c8a02692dd
+	Message-Authenticator = 0x00000000000000000000000000000000
+	State = 0xd7f80496d1ff1dad5c0b5935e031cae1
+Tue May  9 04:40:24 2017 : Info: Finished request 6.
+Tue May  9 04:40:24 2017 : Debug: Going to the next request
+Tue May  9 04:40:24 2017 : Debug: Waking up in 4.9 seconds.
+rad_recv: Access-Request packet from host 192.168.2.254 port 2049, id=0, length=175
+Tue May  9 04:40:24 2017 : Info: Cleaning up request 6 ID 0 with timestamp +103
+	User-Name = "altair"
+	NAS-IP-Address = 192.168.2.254
+	Called-Station-Id = "687f749cab27"
+	Calling-Station-Id = "b49d0b58f358"
+	NAS-Identifier = "687f749cab27"
+	NAS-Port = 51
+	Framed-MTU = 1400
+	State = 0xd7f80496d1ff1dad5c0b5935e031cae1
+	NAS-Port-Type = Wireless-802.11
+	EAP-Message = 0x0207002b1900170301002010a3e7bad17ae2b1283009aa8167c2b8f95a5d4720f91c3479ebfebb40a3d051
+	Message-Authenticator = 0x113973ca092735979f514f0a59d68d2a
+Tue May  9 04:40:24 2017 : Info: # Executing section authorize from file /etc/freeradius/sites-enabled/default
+Tue May  9 04:40:24 2017 : Info: +group authorize {
+Tue May  9 04:40:24 2017 : Info: ++[preprocess] = ok
+Tue May  9 04:40:24 2017 : Info: ++[chap] = noop
+Tue May  9 04:40:24 2017 : Info: ++[mschap] = noop
+Tue May  9 04:40:24 2017 : Info: ++[digest] = noop
+Tue May  9 04:40:24 2017 : Info: [suffix] No '@' in User-Name = "altair", looking up realm NULL
+Tue May  9 04:40:24 2017 : Info: [suffix] No such realm "NULL"
+Tue May  9 04:40:24 2017 : Info: ++[suffix] = noop
+Tue May  9 04:40:24 2017 : Info: [eap] EAP packet type response id 7 length 43
+Tue May  9 04:40:24 2017 : Info: [eap] Continuing tunnel setup.
+Tue May  9 04:40:24 2017 : Info: ++[eap] = ok
+Tue May  9 04:40:24 2017 : Info: +} # group authorize = ok
+Tue May  9 04:40:24 2017 : Info: Found Auth-Type = EAP
+Tue May  9 04:40:24 2017 : Info: # Executing group from file /etc/freeradius/sites-enabled/default
+Tue May  9 04:40:24 2017 : Info: +group authenticate {
+Tue May  9 04:40:24 2017 : Info: [eap] Request found, released from the list
+Tue May  9 04:40:24 2017 : Info: [eap] EAP/peap
+Tue May  9 04:40:24 2017 : Info: [eap] processing type peap
+Tue May  9 04:40:24 2017 : Info: [peap] processing EAP-TLS
+Tue May  9 04:40:24 2017 : Info: [peap] eaptls_verify returned 7 
+Tue May  9 04:40:24 2017 : Info: [peap] Done initial handshake
+Tue May  9 04:40:24 2017 : Info: [peap] eaptls_process returned 7 
+Tue May  9 04:40:24 2017 : Info: [peap] EAPTLS_OK
+Tue May  9 04:40:24 2017 : Info: [peap] Session established.  Decoding tunneled attributes.
+Tue May  9 04:40:24 2017 : Info: [peap] Peap state WAITING FOR INNER IDENTITY
+Tue May  9 04:40:24 2017 : Info: [peap] Identity - altair
+Tue May  9 04:40:24 2017 : Info: [peap] Got inner identity 'altair'
+Tue May  9 04:40:24 2017 : Info: [peap] Setting default EAP type for tunneled EAP session.
+Tue May  9 04:40:24 2017 : Info: [peap] Got tunneled request
+	EAP-Message = 0x0207000b01616c74616972
+server  {
+Tue May  9 04:40:24 2017 : Info: [peap] Setting User-Name to altair
+Sending tunneled request
+	EAP-Message = 0x0207000b01616c74616972
+	FreeRADIUS-Proxied-To = 127.0.0.1
+	User-Name = "altair"
+server inner-tunnel {
+Tue May  9 04:40:24 2017 : Info: # Executing section authorize from file /etc/freeradius/sites-enabled/inner-tunnel
+Tue May  9 04:40:24 2017 : Info: +group authorize {
+Tue May  9 04:40:24 2017 : Info: ++[chap] = noop
+Tue May  9 04:40:24 2017 : Info: ++[mschap] = noop
+Tue May  9 04:40:24 2017 : Info: [suffix] No '@' in User-Name = "altair", looking up realm NULL
+Tue May  9 04:40:24 2017 : Info: [suffix] No such realm "NULL"
+Tue May  9 04:40:24 2017 : Info: ++[suffix] = noop
+Tue May  9 04:40:24 2017 : Info: ++update control {
+Tue May  9 04:40:24 2017 : Info: ++} # update control = noop
+Tue May  9 04:40:24 2017 : Info: [eap] EAP packet type response id 7 length 11
+Tue May  9 04:40:24 2017 : Info: [eap] No EAP Start, assuming it's an on-going EAP conversation
+Tue May  9 04:40:24 2017 : Info: ++[eap] = updated
+Tue May  9 04:40:24 2017 : Info: [files] users: Matched entry altair at line 76
+Tue May  9 04:40:24 2017 : Info: ++[files] = ok
+Tue May  9 04:40:24 2017 : Info: ++[expiration] = noop
+Tue May  9 04:40:24 2017 : Info: ++[logintime] = noop
+Tue May  9 04:40:24 2017 : Info: [pap] WARNING: Auth-Type already set.  Not setting to PAP
+Tue May  9 04:40:24 2017 : Info: ++[pap] = noop
+Tue May  9 04:40:24 2017 : Info: +} # group authorize = updated
+Tue May  9 04:40:24 2017 : Info: Found Auth-Type = EAP
+Tue May  9 04:40:24 2017 : Info: # Executing group from file /etc/freeradius/sites-enabled/inner-tunnel
+Tue May  9 04:40:24 2017 : Info: +group authenticate {
+Tue May  9 04:40:24 2017 : Info: [eap] EAP Identity
+Tue May  9 04:40:24 2017 : Info: [eap] processing type mschapv2
+Tue May  9 04:40:24 2017 : Debug: rlm_eap_mschapv2: Issuing Challenge
+Tue May  9 04:40:24 2017 : Info: ++[eap] = handled
+Tue May  9 04:40:24 2017 : Info: +} # group authenticate = handled
+} # server inner-tunnel
+Tue May  9 04:40:24 2017 : Info: [peap] Got tunneled reply code 11
+	EAP-Message = 0x010800201a0108001b107205733fb1e11881ce66bc008cb6996e616c74616972
+	Message-Authenticator = 0x00000000000000000000000000000000
+	State = 0x1ae029dc1ae8337912fe227e859f115b
+Tue May  9 04:40:24 2017 : Info: [peap] Got tunneled reply RADIUS code 11
+	EAP-Message = 0x010800201a0108001b107205733fb1e11881ce66bc008cb6996e616c74616972
+	Message-Authenticator = 0x00000000000000000000000000000000
+	State = 0x1ae029dc1ae8337912fe227e859f115b
+Tue May  9 04:40:24 2017 : Info: [peap] Got tunneled Access-Challenge
+  PEAP tunnel data out 0000: 1a 01 08 00 1b 10 72 05 73 3f b1 e1 18 81 ce 66 
+  PEAP tunnel data out 0010: bc 00 8c b6 99 6e 61 6c 74 61 69 72 
+Tue May  9 04:40:24 2017 : Info: ++[eap] = handled
+Tue May  9 04:40:24 2017 : Info: +} # group authenticate = handled
+Sending Access-Challenge of id 0 to 192.168.2.254 port 2049
+	EAP-Message = 0x0108004b190017030100406283b5bfc01704239562bf9ef13a1ccdfe3a1d7e196786167dd24432b9ded3c45de6b26c4d8913e8522323055ab717165e066cb17025fe220d631957eba49ece
+	Message-Authenticator = 0x00000000000000000000000000000000
+	State = 0xd7f80496d0f01dad5c0b5935e031cae1
+Tue May  9 04:40:24 2017 : Info: Finished request 7.
+Tue May  9 04:40:24 2017 : Debug: Going to the next request
+Tue May  9 04:40:24 2017 : Debug: Waking up in 4.9 seconds.
+rad_recv: Access-Request packet from host 192.168.2.254 port 2049, id=0, length=239
+Tue May  9 04:40:24 2017 : Info: Cleaning up request 7 ID 0 with timestamp +104
+	User-Name = "altair"
+	NAS-IP-Address = 192.168.2.254
+	Called-Station-Id = "687f749cab27"
+	Calling-Station-Id = "b49d0b58f358"
+	NAS-Identifier = "687f749cab27"
+	NAS-Port = 51
+	Framed-MTU = 1400
+	State = 0xd7f80496d0f01dad5c0b5935e031cae1
+	NAS-Port-Type = Wireless-802.11
+	EAP-Message = 0x0208006b190017030100602528238bb8a3c731f286b3df8cfcd51550880a06f3aa1496f89c99d2d1824c0cdeedbd6124a2a295588f712745664cd2a169bb4684213fd76a4635e8dad1cda857975063ea718b438e39301c0061e86dbc01d063a37e73168f69f9c0f02def8f
+	Message-Authenticator = 0x04bfc85949fdb8e211c0f9e758fde1e1
+Tue May  9 04:40:24 2017 : Info: # Executing section authorize from file /etc/freeradius/sites-enabled/default
+Tue May  9 04:40:24 2017 : Info: +group authorize {
+Tue May  9 04:40:24 2017 : Info: ++[preprocess] = ok
+Tue May  9 04:40:24 2017 : Info: ++[chap] = noop
+Tue May  9 04:40:24 2017 : Info: ++[mschap] = noop
+Tue May  9 04:40:24 2017 : Info: ++[digest] = noop
+Tue May  9 04:40:24 2017 : Info: [suffix] No '@' in User-Name = "altair", looking up realm NULL
+Tue May  9 04:40:24 2017 : Info: [suffix] No such realm "NULL"
+Tue May  9 04:40:24 2017 : Info: ++[suffix] = noop
+Tue May  9 04:40:24 2017 : Info: [eap] EAP packet type response id 8 length 107
+Tue May  9 04:40:24 2017 : Info: [eap] Continuing tunnel setup.
+Tue May  9 04:40:24 2017 : Info: ++[eap] = ok
+Tue May  9 04:40:24 2017 : Info: +} # group authorize = ok
+Tue May  9 04:40:24 2017 : Info: Found Auth-Type = EAP
+Tue May  9 04:40:24 2017 : Info: # Executing group from file /etc/freeradius/sites-enabled/default
+Tue May  9 04:40:24 2017 : Info: +group authenticate {
+Tue May  9 04:40:24 2017 : Info: [eap] Request found, released from the list
+Tue May  9 04:40:24 2017 : Info: [eap] EAP/peap
+Tue May  9 04:40:24 2017 : Info: [eap] processing type peap
+Tue May  9 04:40:24 2017 : Info: [peap] processing EAP-TLS
+Tue May  9 04:40:24 2017 : Info: [peap] eaptls_verify returned 7 
+Tue May  9 04:40:24 2017 : Info: [peap] Done initial handshake
+Tue May  9 04:40:24 2017 : Info: [peap] eaptls_process returned 7 
+Tue May  9 04:40:24 2017 : Info: [peap] EAPTLS_OK
+Tue May  9 04:40:24 2017 : Info: [peap] Session established.  Decoding tunneled attributes.
+Tue May  9 04:40:24 2017 : Info: [peap] Peap state phase2
+Tue May  9 04:40:24 2017 : Info: [peap] EAP type mschapv2
+Tue May  9 04:40:24 2017 : Info: [peap] Got tunneled request
+	EAP-Message = 0x020800411a0208003c313adcd3d41960cafe45491592d7186acc00000000000000005568f012782e33436ec6306962ac2b44bf4e752eefbf42fa00616c74616972
+server  {
+Tue May  9 04:40:24 2017 : Info: [peap] Setting User-Name to altair
+Sending tunneled request
+	EAP-Message = 0x020800411a0208003c313adcd3d41960cafe45491592d7186acc00000000000000005568f012782e33436ec6306962ac2b44bf4e752eefbf42fa00616c74616972
+	FreeRADIUS-Proxied-To = 127.0.0.1
+	User-Name = "altair"
+	State = 0x1ae029dc1ae8337912fe227e859f115b
+server inner-tunnel {
+Tue May  9 04:40:24 2017 : Info: # Executing section authorize from file /etc/freeradius/sites-enabled/inner-tunnel
+Tue May  9 04:40:24 2017 : Info: +group authorize {
+Tue May  9 04:40:24 2017 : Info: ++[chap] = noop
+Tue May  9 04:40:24 2017 : Info: ++[mschap] = noop
+Tue May  9 04:40:24 2017 : Info: [suffix] No '@' in User-Name = "altair", looking up realm NULL
+Tue May  9 04:40:24 2017 : Info: [suffix] No such realm "NULL"
+Tue May  9 04:40:24 2017 : Info: ++[suffix] = noop
+Tue May  9 04:40:24 2017 : Info: ++update control {
+Tue May  9 04:40:24 2017 : Info: ++} # update control = noop
+Tue May  9 04:40:24 2017 : Info: [eap] EAP packet type response id 8 length 65
+Tue May  9 04:40:24 2017 : Info: [eap] No EAP Start, assuming it's an on-going EAP conversation
+Tue May  9 04:40:24 2017 : Info: ++[eap] = updated
+Tue May  9 04:40:24 2017 : Info: [files] users: Matched entry altair at line 76
+Tue May  9 04:40:24 2017 : Info: ++[files] = ok
+Tue May  9 04:40:24 2017 : Info: ++[expiration] = noop
+Tue May  9 04:40:24 2017 : Info: ++[logintime] = noop
+Tue May  9 04:40:24 2017 : Info: [pap] WARNING: Auth-Type already set.  Not setting to PAP
+Tue May  9 04:40:24 2017 : Info: ++[pap] = noop
+Tue May  9 04:40:24 2017 : Info: +} # group authorize = updated
+Tue May  9 04:40:24 2017 : Info: Found Auth-Type = EAP
+Tue May  9 04:40:24 2017 : Info: # Executing group from file /etc/freeradius/sites-enabled/inner-tunnel
+Tue May  9 04:40:24 2017 : Info: +group authenticate {
+Tue May  9 04:40:24 2017 : Info: [eap] Request found, released from the list
+Tue May  9 04:40:24 2017 : Info: [eap] EAP/mschapv2
+Tue May  9 04:40:24 2017 : Info: [eap] processing type mschapv2
+Tue May  9 04:40:24 2017 : Info: [mschapv2] # Executing group from file /etc/freeradius/sites-enabled/inner-tunnel
+Tue May  9 04:40:24 2017 : Info: [mschapv2] +group MS-CHAP {
+Tue May  9 04:40:24 2017 : Info: [mschap] Creating challenge hash with username: altair
+Tue May  9 04:40:24 2017 : Info: [mschap] Client is using MS-CHAPv2 for altair, we need NT-Password
+Tue May  9 04:40:24 2017 : Info: [mschap] FAILED: MS-CHAP2-Response is incorrect
+Tue May  9 04:40:24 2017 : Info: ++[mschap] = reject
+Tue May  9 04:40:24 2017 : Info: +} # group MS-CHAP = reject
+Tue May  9 04:40:24 2017 : Info: [eap] Freeing handler
+Tue May  9 04:40:24 2017 : Info: ++[eap] = reject
+Tue May  9 04:40:24 2017 : Info: +} # group authenticate = reject
+Tue May  9 04:40:24 2017 : Info: Failed to authenticate the user.
+Tue May  9 04:40:24 2017 : Info: Using Post-Auth-Type REJECT
+Tue May  9 04:40:24 2017 : Info: # Executing group from file /etc/freeradius/sites-enabled/inner-tunnel
+Tue May  9 04:40:24 2017 : Info: +group REJECT {
+Tue May  9 04:40:24 2017 : Info: [attr_filter.access_reject] 	expand: %{User-Name} -> altair
+Tue May  9 04:40:24 2017 : Debug: attr_filter: Matched entry DEFAULT at line 11
+Tue May  9 04:40:24 2017 : Info: ++[attr_filter.access_reject] = updated
+Tue May  9 04:40:24 2017 : Info: +} # group REJECT = updated
+} # server inner-tunnel
+Tue May  9 04:40:24 2017 : Info: [peap] Got tunneled reply code 3
+	MS-CHAP-Error = "\010E=691 R=1"
+	EAP-Message = 0x04080004
+	Message-Authenticator = 0x00000000000000000000000000000000
+Tue May  9 04:40:24 2017 : Info: [peap] Got tunneled reply RADIUS code 3
+	MS-CHAP-Error = "\010E=691 R=1"
+	EAP-Message = 0x04080004
+	Message-Authenticator = 0x00000000000000000000000000000000
+Tue May  9 04:40:24 2017 : Info: [peap] Tunneled authentication was rejected.
+Tue May  9 04:40:24 2017 : Info: [peap] FAILURE
+Tue May  9 04:40:24 2017 : Info: ++[eap] = handled
+Tue May  9 04:40:24 2017 : Info: +} # group authenticate = handled
+Sending Access-Challenge of id 0 to 192.168.2.254 port 2049
+	EAP-Message = 0x0109002b19001703010020997106a4ea6db505750b4acc624df62e9e757d8cc7e8b466e21782e345d88255
+	Message-Authenticator = 0x00000000000000000000000000000000
+	State = 0xd7f80496dff11dad5c0b5935e031cae1
+Tue May  9 04:40:24 2017 : Info: Finished request 8.
+Tue May  9 04:40:24 2017 : Debug: Going to the next request
+Tue May  9 04:40:24 2017 : Debug: Waking up in 4.9 seconds.
+rad_recv: Access-Request packet from host 192.168.2.254 port 2049, id=0, length=175
+Tue May  9 04:40:24 2017 : Info: Cleaning up request 8 ID 0 with timestamp +104
+	User-Name = "altair"
+	NAS-IP-Address = 192.168.2.254
+	Called-Station-Id = "687f749cab27"
+	Calling-Station-Id = "b49d0b58f358"
+	NAS-Identifier = "687f749cab27"
+	NAS-Port = 51
+	Framed-MTU = 1400
+	State = 0xd7f80496dff11dad5c0b5935e031cae1
+	NAS-Port-Type = Wireless-802.11
+	EAP-Message = 0x0209002b190017030100200a8020fb6112377e721d4bc0790f91a775a149eea845196ec108d8df8967c9bc
+	Message-Authenticator = 0x33df10a62c464d0de2f5a109a3c47290
+Tue May  9 04:40:24 2017 : Info: # Executing section authorize from file /etc/freeradius/sites-enabled/default
+Tue May  9 04:40:24 2017 : Info: +group authorize {
+Tue May  9 04:40:24 2017 : Info: ++[preprocess] = ok
+Tue May  9 04:40:24 2017 : Info: ++[chap] = noop
+Tue May  9 04:40:24 2017 : Info: ++[mschap] = noop
+Tue May  9 04:40:24 2017 : Info: ++[digest] = noop
+Tue May  9 04:40:24 2017 : Info: [suffix] No '@' in User-Name = "altair", looking up realm NULL
+Tue May  9 04:40:24 2017 : Info: [suffix] No such realm "NULL"
+Tue May  9 04:40:24 2017 : Info: ++[suffix] = noop
+Tue May  9 04:40:24 2017 : Info: [eap] EAP packet type response id 9 length 43
+Tue May  9 04:40:24 2017 : Info: [eap] Continuing tunnel setup.
+Tue May  9 04:40:24 2017 : Info: ++[eap] = ok
+Tue May  9 04:40:24 2017 : Info: +} # group authorize = ok
+Tue May  9 04:40:24 2017 : Info: Found Auth-Type = EAP
+Tue May  9 04:40:24 2017 : Info: # Executing group from file /etc/freeradius/sites-enabled/default
+Tue May  9 04:40:24 2017 : Info: +group authenticate {
+Tue May  9 04:40:24 2017 : Info: [eap] Request found, released from the list
+Tue May  9 04:40:24 2017 : Info: [eap] EAP/peap
+Tue May  9 04:40:24 2017 : Info: [eap] processing type peap
+Tue May  9 04:40:24 2017 : Info: [peap] processing EAP-TLS
+Tue May  9 04:40:24 2017 : Info: [peap] eaptls_verify returned 7 
+Tue May  9 04:40:24 2017 : Info: [peap] Done initial handshake
+Tue May  9 04:40:24 2017 : Info: [peap] eaptls_process returned 7 
+Tue May  9 04:40:24 2017 : Info: [peap] EAPTLS_OK
+Tue May  9 04:40:24 2017 : Info: [peap] Session established.  Decoding tunneled attributes.
+Tue May  9 04:40:24 2017 : Info: [peap] Peap state send tlv failure
+Tue May  9 04:40:24 2017 : Info: [peap] Received EAP-TLV response.
+Tue May  9 04:40:24 2017 : Info: [peap]  The users session was previously rejected: returning reject (again.)
+Tue May  9 04:40:24 2017 : Info: [peap]  *** This means you need to read the PREVIOUS messages in the debug output
+Tue May  9 04:40:24 2017 : Info: [peap]  *** to find out the reason why the user was rejected.
+Tue May  9 04:40:24 2017 : Info: [peap]  *** Look for "reject" or "fail".  Those earlier messages will tell you.
+Tue May  9 04:40:24 2017 : Info: [peap]  *** what went wrong, and how to fix the problem.
+Tue May  9 04:40:24 2017 : Info: [eap] Handler failed in EAP/peap
+Tue May  9 04:40:24 2017 : Info: [eap] Failed in EAP select
+Tue May  9 04:40:24 2017 : Info: ++[eap] = invalid
+Tue May  9 04:40:24 2017 : Info: +} # group authenticate = invalid
+Tue May  9 04:40:24 2017 : Info: Failed to authenticate the user.
+Tue May  9 04:40:24 2017 : Info: Using Post-Auth-Type REJECT
+Tue May  9 04:40:24 2017 : Info: # Executing group from file /etc/freeradius/sites-enabled/default
+Tue May  9 04:40:24 2017 : Info: +group REJECT {
+Tue May  9 04:40:24 2017 : Info: [sql] 	expand: %{User-Name} -> altair
+Tue May  9 04:40:24 2017 : Info: [sql] sql_set_user escaped user --> 'altair'
+Tue May  9 04:40:24 2017 : Info: [sql] 	expand: %{User-Password} -> 
+Tue May  9 04:40:24 2017 : Info: [sql] 	... expanding second conditional
+Tue May  9 04:40:24 2017 : Info: [sql] 	expand: %{Chap-Password} -> 
+Tue May  9 04:40:24 2017 : Info: [sql] 	expand: INSERT INTO radpostauth                           (username, pass, reply, authdate)                           VALUES (                           '%{User-Name}',                           '%{%{User-Password}:-%{Chap-Password}}',                           '%{reply:Packet-Type}', '%S') -> INSERT INTO radpostauth                           (username, pass, reply, authdate)                           VALUES (                           'altair',                           '',                           'Access-Reject', '2017-05-09 04:40:24')
+Tue May  9 04:40:24 2017 : Debug: rlm_sql (sql) in sql_postauth: query is INSERT INTO radpostauth                           (username, pass, reply, authdate)                           VALUES (                           'altair',                           '',                           'Access-Reject', '2017-05-09 04:40:24')
+Tue May  9 04:40:24 2017 : Debug: rlm_sql (sql): Reserving sql socket id: 28
+Tue May  9 04:40:24 2017 : Debug: rlm_sql (sql): Released sql socket id: 28
+Tue May  9 04:40:24 2017 : Info: ++[sql] = ok
+Tue May  9 04:40:24 2017 : Info: [attr_filter.access_reject] 	expand: %{User-Name} -> altair
+Tue May  9 04:40:24 2017 : Debug: attr_filter: Matched entry DEFAULT at line 11
+Tue May  9 04:40:24 2017 : Info: ++[attr_filter.access_reject] = updated
+Tue May  9 04:40:24 2017 : Info: ++[ldap] = noop
+Tue May  9 04:40:24 2017 : Info: +} # group REJECT = updated
+Tue May  9 04:40:24 2017 : Info: Delaying reject of request 9 for 1 seconds
+Tue May  9 04:40:24 2017 : Debug: Going to the next request
+Tue May  9 04:40:24 2017 : Debug: Waking up in 0.9 seconds.
+Tue May  9 04:40:25 2017 : Info: Sending delayed reject for request 9
+Sending Access-Reject of id 0 to 192.168.2.254 port 2049
+	EAP-Message = 0x04090004
+	Message-Authenticator = 0x00000000000000000000000000000000
+Tue May  9 04:40:25 2017 : Debug: Waking up in 4.9 seconds.
+Tue May  9 04:40:30 2017 : Info: Cleaning up request 9 ID 0 with timestamp +104
+Tue May  9 04:40:30 2017 : Info: Ready to process requests.
+
+

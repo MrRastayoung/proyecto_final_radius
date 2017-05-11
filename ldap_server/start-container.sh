@@ -2,14 +2,27 @@
 
 # Nombre que queremos que tenga el container
 CONTAINER_NAME="ldap"
-CONTAINER_HOSTNAME="ldap.zion.com"
+
+# Nombre del Dominio
+DOMAIN_NAME=".zion.com"
+
+# Nombre del Host
+CONTAINER_HOSTNAME="ldap"
+
 # Imagen que utilizaremos ( imagen creada con docker file )
 REPOSITORI_IMAGE="proyecto_final/ldap"
 
 ### Arrancar container con tiempo de vida limitado
 /bin/echo "CREANDO CONTENEDOR"
 
-docker run --rm --name $CONTAINER_NAME --hostname $CONTAINER_HOSTNAME -p 389:389 -p 636:636 --net network_proyecto_final/radius --ip 192.168.0.5 --link radius:radius -id $REPOSITORI_IMAGE
+docker run --rm \
+  --name $CONTAINER_NAME \
+  --hostname "$CONTAINER_HOSTNAME$DOMAIN_NAME" \
+  -p 389:389 -p 636:636 \
+  --net network_proyecto_final/radius \
+  --ip 192.168.0.5 \
+  --link radius:radius_server \
+  -id $REPOSITORI_IMAGE
 
 sleep 4s
 clear

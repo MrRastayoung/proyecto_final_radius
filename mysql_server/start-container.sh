@@ -2,10 +2,15 @@
 
 ## Nombre que queremos que tenga el container
 CONTAINER_NAME=mysql
+
 ## Imagen que utilizaremos ( imagen creada con docker file )
 REPOSITORI_IMAGE="proyecto_final/mysql"
+
+## Nombre que tendra el host
 CONTAINER_HOSTNAME="mysql"
 
+## Nombre del dominio
+DOMAIN_NAME=".zion.com"
 
 mkdir -p /opt/mysql/data
 #chcon -Rt svirt_sandbox_file_t /opt/mysql/data
@@ -13,42 +18,43 @@ mkdir -p /opt/mysql/data
 #################################################
 
 /bin/echo "Arrancando container en BACKGROUND"
-#docker run --rm --name $CONTAINER_NAME -id $REPOSITORI_IMAGE -v /opt/mysql/data:/var/lib/mysql 
-docker run --rm --name $CONTAINER_NAME --hostname $CONTAINER_HOSTNAME -p 3306:3306 --net network_proyecto_final/radius --ip 192.168.0.2 -id $REPOSITORI_IMAGE -v /opt/mysql/data:/var/lib/mysql ||  docker stop $CONTAINER_NAME &&
-sleep 5s
+docker run --rm \
+  --name $CONTAINER_NAME \
+  --hostname "$CONTAINER_HOSTNAME$DOMAIN_NAME" \
+  -p 3306:3306 \
+  --net network_proyecto_final/radius \
+  --ip 192.168.0.2 -id $REPOSITORI_IMAGE \
+  --link radius:radius \
+  -v /opt/mysql/data:/var/lib/mysql \
+ ||  docker stop $CONTAINER_NAME &&
+sleep 3
 clear
 #################################################
 
 /bin/echo "Logs mientras arranca el container"
 docker logs $CONTAINER_NAME --tail=all 
-sleep 7s
+sleep 5
 clear
 #################################################
 
 /bin/echo "Procesos container"
 docker exec -it $CONTAINER_NAME ps -ax
-sleep 5s
+sleep 3
 clear
 #################################################
 
 /bin/echo "Mostrar bases de datos Principales" 
 docker exec -it $CONTAINER_NAME mysql -uroot -e "show databases;"
-sleep 10s
+sleep 5
 clear
-#################################################
-
-#/bin/echo "Insertando Base de datos"
-#docker exec -it $CONTAINER_NAME bash /opt/docker/insert_bd.sh
-#sleep 4s
-#clear
 #################################################
 
 /bin/echo "Seleccionando la base de datos insertada"
-docker exec -it $CONTAINER_NAME mysql -uroot -e "use radius;select * from radcheck;"
-sleep 5s
+docker exec -it $CONTAINER_NAME mysql -uroot -e "use radius; select * from radcheck; select * from nas;"
+sleep 5
 clear
 #################################################
 
-/bin/echo "Eliminando container"
+#/bin/echo "Eliminando container"
 #docker stop mysql
 
