@@ -7,15 +7,15 @@
 Los temas que serán tratados son los siguientes:
 
 *Radius*: Autenticación, Autorización, Acceso (AAA):
-0. Que es radius? [Servidor Radius](http://trabajotele08.blogspot.com.es/)
-0.1. Implementación de radius?
-0.2. Protocolos de Autenticación? [Metodos Autenticación](http://karenmarce.blogspot.es/1307915040/) 
-0.2.1. PAP
-0.2.2. CHAP
-0.2.3. EAP
-0.2.4. MSCHAP
-0.2.5. ACCESO SIN AUTENTICAR
-0.3. Metodos de Autenticación?
+1. Que es radius? [Servidor Radius](http://trabajotele08.blogspot.com.es/)
+2. Implementación de radius?
+  1. Protocolos de Autenticación? [Metodos Autenticación](http://karenmarce.blogspot.es/1307915040/) 
+    1. PAP
+    2. CHAP
+    3. EAP
+    4. MSCHAP
+    5. ACCESO SIN AUTENTICAR
+3. Metodos de Autenticación?
 0.3.1. FILE
 0.3.2. UNIX
 0.3.3. PAM
